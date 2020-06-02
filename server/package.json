@@ -1,0 +1,23 @@
+{
+  "name": "vuelos_server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iicc1/LIS_buscador_vuelos.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iicc1/LIS_buscador_vuelos/issues"
+  },
+  "homepage": "https://github.com/iicc1/LIS_buscador_vuelos#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
+  }
+}
