@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Trabajo2 vuelos</title>    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link type="text/css" rel="stylesheet" href="stylesheet.css" />
+
+
+</head>
+
+<body>
+	<div id="reserva" class="section">
+		<div class="section-center">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4">
+						<div class="reserva-txt">
+							<h1>RESERVA DE BILLETES DE AVIÓN</h1>
+							<p>Laboratorio de Ingeniería de Software. Segundo trabajo de la asignatura: AngularJS</p>
+						</div>
+					</div>
+					<div class="col">
+						<div class="form">
+							<form>
+                                <div class="row">
+                                    <div class="col">
+                                        <span>
+                                            <input type="radio" name="flight-type" value="one-way">
+                                            <b>Solo ida</b>
+                                        </span>
+
+                                        <span class="col-md-6">
+                                            <input type="radio" name="flight-type" value="roundtrip">
+                                            <b>Ida y vuelta</b>
+                                        </span>
+                                    </div>
+								</div>
+                                
+                                <br>
+                                
+								<div class="row">
+									<div class="col-md-6">
+										<div class="label-group">
+											<span class="label">ORIGEN</span>
+											<input class="input" type="text" placeholder="Ciudad">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="label-group">
+											<span class="label">DESTINO</span>
+											<input class="input" type="text" placeholder="Ciudad">
+										</div>
+									</div>
+								</div>
+                                
+								<div class="row">
+									<div class="col-md-6">
+										<div class="label-group">
+											<span class="label">SALIDA</span>
+											<input class="input" type="date">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="label-group">
+											<span class="label">LLEGADA</span>
+											<input class="input" type="date">
+										</div>
+									</div>
+								</div>
+                                
+								<div class="row">
+									<div class="col-md-4">
+										<div class="label-group">
+											<span class="label">PASAJEROS</span>
+											<input class="input" type="number">
+										</div>
+									</div>
+									<div class="col-md-4"></div>
+                                    <div class="col-md-4">
+                                        <div class="form-btn">
+                                            <button class="submit-btn">VUELOS DISPONIBLES</button>
+                                        </div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
