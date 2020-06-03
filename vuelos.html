@@ -1,0 +1,42 @@
+<body ng-controller="vuelosCtrl">
+
+    Estado: {{error}}
+    <br>
+    <a ng-href="#!/">Volver</a>
+    <br>
+    Origen: {{vuelosOrigen}} Destino: {{vuelosDestino}} Billetes: {{numBilletes}}
+    <br>
+    Salida: {{fechaSalida | date:'dd/MM/yyyy'}} Llegada: {{fechaLlegada | date:'dd/MM/yyyy'}}
+    <br>
+
+    <br>
+    Salida sanitizada:
+    <br>
+    Llegada sanitizada:
+
+    <table>
+        <tr>
+            <th ng-click="setOrder('vuelo')"> Vuelo </th>
+            <th ng-click="setOrder('origen')"> Origen </th>
+            <th ng-click="setOrder('destino')"> Destino </th>
+            <th ng-click="setOrder('salida')"> Salida </th>
+            <th ng-click="setOrder('llegada')"> Llegada </th>
+            <th> Precio business </th>
+            <th> Precio óptimo </th>
+            <th> Precio economy </th>
+        </tr>
+        <tr ng-repeat="item in data | filter: {'origen' : vuelosOrigen} | filter: {'destino' : vuelosDestino} | orderBy:selectedOrder">
+
+            <td>{{item.vuelo}}</td>
+            <td>{{item.origen}}</td>
+            <td>{{item.destino}}</td>
+            <td>{{item.salida | date:'dd/MM/yyyy'}}</td>
+            <td>{{item.llegada | date:'dd/MM/yyyy'}}</td>
+            <td>{{item.bussiness}}</td>
+            <td>{{item.optima}}</td>
+            <td>{{item.economy}}</td>
+
+        </tr>
+    </table>
+
+</body>
