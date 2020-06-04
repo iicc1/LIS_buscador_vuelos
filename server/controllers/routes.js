@@ -2,7 +2,7 @@ const comprar = require('../models/comprar')
 const vuelos = require('../models/vuelos')
 
 const router = app => {
-  app.get('/test', async (request, response) => {
+  app.get('/', async (request, response) => {
     const reply = {}
     reply.success = true
     response.send(reply)
@@ -23,8 +23,9 @@ const router = app => {
       reply.success = true
       reply.result = await vuelos(queryData)
     } catch (error) {
+      console.log(error.message)
       reply.success = false
-      reply.message = error
+      reply.message = error.message
     }
     response.send(reply)
   })
