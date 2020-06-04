@@ -2,8 +2,9 @@
 
 var app = angular.module("indexApp",['ngRoute']);
 var billetes;
-var fechaSalida;
-var fechaLlegada;
+var fechaIda;
+var fechaVuelta;
+var soloIda;
 
 app.config(function($routeProvider) { 
     $routeProvider. 
@@ -22,23 +23,24 @@ app.config(function($routeProvider) {
 
 app.controller("mainCtrl", function($scope){
     $scope.initialize = function() {
-
+        soloIda = false;
     }
 
+    $scope.updateTipoBillete() = function() {
+        soloIda = true;
+    }
+    
     $scope.updateBilletes = function() {
         billetes = $scope.inputBilletes;
         console.log(billetes);
     }
 
-    $scope.updateFechaSalida = function() {
-        fechaSalida = $scope.inputSalida + $scope.inputSalida.getTimezoneOffset();
-        //fechaSalida = new Date(fechaSalida.slice(4,15));
-        console.log(fechaSalida);
+    $scope.updateFechaIda = function() {
+        fechaIda = $scope.inputIda + $scope.inputIda.getTimezoneOffset();
     }
 
-    $scope.updateFechaLlegada = function() {
-        fechaLlegada = $scope.inputLlegada + $scope.inputLlegada.getTimezoneOffset();
-        console.log(fechaLlegada);
+    $scope.updateFechaVuelta = function() {
+        fechaLlegada = $scope.inputVuelta + $scope.inputVuelta.getTimezoneOffset();
     }
 
     $scope.initialize();
@@ -50,8 +52,8 @@ app.controller("vuelosCtrl", function($scope,$routeParams,$http){
         $scope.selectedOrder = 'origen';
         $scope.vuelosVisible = false;
         $scope.numBilletes = billetes;
-        $scope.fechaSalida = fechaSalida;
-        $scope.fechaLlegada = fechaLlegada;
+        $scope.fechaIda = fechaIda;
+        $scope.fechaVuelta = fechaVuelta;
     }
 
     $scope.vuelosOrigen = $routeParams.orig;
@@ -69,25 +71,30 @@ app.controller("vuelosCtrl", function($scope,$routeParams,$http){
             $scope.error = "No se pudo cargar el JSON. Asegúrate de que se encuentra en el directorio correspondiente.";
         }
     );
+    
+    // TEST
+    // 2020-08-10T20:10:00.000Z LANZAROTE MADRID
+    
+    $scope.dateManager = function(ida,vuelta) {
+        var formatIdaSeleccionada = new Date(fechaIda.slice(4,15))
+        // Por la zona horaria tenemos un desfase de 1 día
+        formatIdaSeleccionada.setDate(formatIdaSeleccionada.getDate() + 1);
+        formatIdaSeleccionada = formatIdaSeleccionada.toISOString();
+        formatIdaSeleccionada = formatIdaSeleccionada.slice(0,10);
+        
+        var formatIdaVuelo = ida.slice(0,10);
+        
+        if(formatIdaSeleccionada == formatIdaVuelo) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    $scope.findVuelta = function() {
+        return new Date();
+    }
 
     $scope.initialValues();
 
 });
-
-// TODO: Arreglar el filtro de fechas
-
-app.filter('filterLlegada',function() {
-    return function(itemsFromData, itemFechaLlegada) {
-        var parsedDate = parseDate(itemFechaLlegada);
-        var result = [];
-        for(var i = 0 ; i < itemsFromData.length ; i++) {
-            result.push(itemsFromData[i]);
-        }
-        return result;
-    };
-});
-
-//function parseDate(input) {
-    //var parts = input.split('-');
-    //return new Date(parts[2],parts[1]-1,parts[0]);
-//}

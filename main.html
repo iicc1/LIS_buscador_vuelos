@@ -1,7 +1,7 @@
 <form novalidate name="userInput">
-    <input type="radio" id="ida" name="tipoBillete" ng-model="inputIda">
+    <input type="radio" id="ida" name="tipoBillete" ng-change="isSoloIda()" ng-model="inputIda">
     <label for="ida">Ida</label>
-    <input type="radio" id="idaVuelta" name="tipoBillete" ng-model="inputIdaVuelta">
+    <input type="radio" id="idaVuelta" name="tipoBillete" ng-change="isIdaVuelta()" ng-model="inputIdaVuelta">
     <label for="idaVuelta">Ida y vuelta</label> Desactivado
 
     <br>
@@ -9,8 +9,8 @@
     Desde: <input type="text" placeholder="Salida" ng-model="inputOrigen"><br>
     Hasta: <input type="text" placeholder="Destino" ng-model="inputDestino"><br>
     <br>
-    Salida: <input type="date" ng-change="updateFechaSalida()" ng-model="inputSalida"> <br>
-    Llegada: <input type="date" ng-change="updateFechaLlegada()" ng-model="inputLlegada"><br>
+    Ida: <input type="date" ng-change="updateFechaIda()" ng-model="inputIda"> <br>
+    Vuelta: <input type="date" ng-change="updateFechaVuelta()" ng-model="inputVuelta"><br>
     <br>
     Nº billetes: <input type="number" min="1" max="100" value="1" ng-change="updateBilletes()" ng-model="inputBilletes"><br>
     <br>
