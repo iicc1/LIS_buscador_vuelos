@@ -1,8 +1,8 @@
 <form novalidate name="userInput">
-    <input type="radio" id="ida" name="tipoBillete" ng-change="isSoloIda()" ng-model="inputIda">
+    <input type="radio" id="ida" name="tipoBillete" ng-click="updateTipoBillete('true')" ng-model="inputIda">
     <label for="ida">Ida</label>
-    <input type="radio" id="idaVuelta" name="tipoBillete" ng-change="isIdaVuelta()" ng-model="inputIdaVuelta">
-    <label for="idaVuelta">Ida y vuelta</label> Desactivado
+    <input type="radio" id="idaVuelta" name="tipoBillete" ng-click="updateTipoBillete('false')" ng-model="inputIdaVuelta">
+    <label for="idaVuelta">Ida y vuelta</label>
 
     <br>
 
