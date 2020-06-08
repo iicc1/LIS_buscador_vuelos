@@ -12,7 +12,7 @@
 	transform: translateY(-50%);
 }
 
-#reserva {
+.reserva {
 	background-image: url('https://images.squarespace-cdn.com/content/v1/594336f837c5819eb6378ac7/1572276068069-1CN49Z6YO9Y4FO8A15RX/ke17ZwdGBToddI8pDm48kLkXF2pIyv_F2eUT9F60jBl7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0iyqMbMesKd95J-X4EagrgU9L3Sa3U8cogeb0tjXbfawd0urKshkc5MgdBeJmALQKw/view+out+the+window+of+a+plane+flying+over+glaciers+and+turquoise+lakes?format=1500w');
 	background-size: cover;
 	background-position: center;
@@ -92,6 +92,16 @@ input.input {
 	position: relative;
 	margin-bottom: 20px;
 }
+
+.row-style {
+    font-size: smaller;
+}
+
+.table {
+  display: table;
+    
+}
+
 
 .submit-btn {
 	color: #fff;

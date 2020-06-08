@@ -1,4 +1,18 @@
 <body ng-controller="vuelosCtrl">
+    
+    <div class="reserva section" >
+        <div class="section-center">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4">
+						<div class="reserva-txt">
+							<h1>RESERVA DE BILLETES DE AVIÓN</h1>
+							<p>Laboratorio de Ingeniería de Software. Segundo trabajo de la asignatura: AngularJS</p>
+						</div>
+					</div>
+                    
+					<div class="col">
+                        <div class="table form">
 
     Estado: {{error}}
     <br>
@@ -13,47 +27,54 @@
 
    Solo ida: {{soloIda}}
    
+
     <table ng-if="soloIda">
         <tr>
-            <th ng-click="setOrder('vuelo')"> Vuelo </th>
-            <th ng-click="setOrder('origen')"> Origen </th>
-            <th ng-click="setOrder('destino')"> Destino </th>
-            <th ng-click="setOrder('salida')"> Salida </th>
-            <th ng-click="setOrder('llegada')"> Llegada </th>
-            <th> Precio business </th>
-            <th> Precio óptimo </th>
-            <th> Precio economy </th>
+            <th class="row-style" ng-click="setOrder('vuelo')"> Vuelo </th>
+            <th class="row-style" ng-click="setOrder('origen')"> Origen </th>
+            <th class="row-style" ng-click="setOrder('destino')"> Destino </th>
+            <th class="row-style" ng-click="setOrder('salida')"> Salida </th>
+            <th class="row-style" ng-click="setOrder('llegada')"> Llegada </th>
+            <th class="row-style"> Precio business </th>
+            <th class="row-style"> Precio óptimo </th>
+            <th class="row-style"> Precio economy </th>
         </tr>
-        <tr ng-if="dateManager(item.salida)" ng-repeat="item in data | filter: {'origen' : vuelosOrigen} | filter: {'destino' : vuelosDestino} | orderBy:selectedOrder">
-            <td>{{item.vuelo}}</td>
-            <td>{{item.origen}}</td>
-            <td>{{item.destino}}</td>
-            <td>{{item.salida | date:'dd/MM/yyyy'}}</td>
-            <td>{{item.llegada | date:'dd/MM/yyyy'}}</td>
-            <td>{{item.bussiness}}</td>
-            <td>{{item.optima}}</td>
-            <td>{{item.economy}}</td>
+        <tr class="row-style" ng-if="dateManager(item.salida)" ng-repeat="item in data | filter: {'origen' : vuelosOrigen} | filter: {'destino' : vuelosDestino} | orderBy:selectedOrder">
+            <td class="row-style">{{item.vuelo}}</td>
+            <td class="row-style">{{item.origen}}</td>
+            <td class="row-style">{{item.destino}}</td>
+            <td class="row-style">{{item.salida | date:'dd/MM/yyyy'}}</td>
+            <td class="row-style">{{item.llegada | date:'dd/MM/yyyy'}}</td>
+            <td class="row-style">{{item.bussiness}}</td>
+            <td class="row-style">{{item.optima}}</td>
+            <td class="row-style">{{item.economy}}</td>
         </tr>
     </table>
     
     <table ng-if="!soloIda">
         <tr>
-            <th ng-click="setOrder('vuelo')"> Vuelo de ida </th>
-            <th ng-click="setOrder('origen')"> Vuelo de vuelta </th>
-            <th> Precio business </th>
-            <th> Precio óptimo </th>
-            <th> Precio economy </th>
+            <th class="row-style" ng-click="setOrder('vuelo')"> Vuelo de ida </th>
+            <th class="row-style" ng-click="setOrder('origen')"> Vuelo de vuelta </th>
+            <th class="row-style"> Precio business </th>
+            <th class="row-style"> Precio óptimo </th>
+            <th class="row-style"> Precio economy </th>
         </tr>
-        <tr ng-repeat="item in data | filter: {'origen' : vuelosOrigen} , {'origen' : vuelosDestino} | filter: {'destino' : vuelosDestino} , {'destino' : vuelosOrigen} | orderBy:selectedOrder">
-            <td>{{item.origen}}</td>
-            <td>{{item.destino}}</td>
-            <td>{{item.bussiness}}</td>
-            <td>{{item.optima}}</td>
-            <td>{{item.economy}}</td>
+        <tr class="row-style" ng-repeat="item in data | filter: {'origen' : vuelosOrigen} , {'origen' : vuelosDestino} | filter: {'destino' : vuelosDestino} , {'destino' : vuelosOrigen} | orderBy:selectedOrder">
+            <td class="row-style">{{item.origen}}</td>
+            <td class="row-style">{{item.destino}}</td>
+            <td class="row-style">{{item.bussiness}}</td>
+            <td class="row-style">{{item.optima}}</td>
+            <td class="row-style">{{item.economy}}</td>
             <td><button>Comprar business</button></td>
             <td><button>Comprar óptima</button></td>
             <td><button>Comprar economy</button></td>
         </tr>
     </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </div>
 
 </body>
