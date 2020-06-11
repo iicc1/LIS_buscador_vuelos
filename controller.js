@@ -192,7 +192,45 @@ app.controller("vuelosCtrl", function($scope,$routeParams,$http){
     }
 
     $scope.comprar = function(precio) {
-        console.log(precio);
+        
+      //  console.log(precio);
+        alert(precio+"€ !");
     }
 
+    $scope.comprarBussines = function(item) {
+        
+      //  console.log(precio);
+        alert((item.bussiness * $scope.numBilletes)+"€ !");
+    }
+    
+    $scope.comprarOptima = function(item) {
+        
+      //  console.log(precio);
+        alert((item.optima * $scope.numBilletes)+"€ !");
+    }
+    
+    $scope.comprarEconomy = function(item) {
+        
+      //  console.log(precio);
+        alert((item.economy * $scope.numBilletes)+"€ !");
+    }
+    
+    
+    $scope.comprarBussines = function(item) {
+        
+      //  console.log(precio);
+        alert((item.bussiness * $scope.numBilletes)+"€ !");
+    }
+    
+    $scope.comprarOptima = function(item) {
+        
+      //  console.log(precio);
+        alert((item.optima * $scope.numBilletes)+"€ !");
+    }
+    
+    $scope.comprarEconomy = function(item) {
+        
+      //  console.log(precio);
+        alert((item.economy * $scope.numBilletes)+"€ !");
+    }
 });
