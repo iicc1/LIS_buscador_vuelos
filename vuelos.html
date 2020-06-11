@@ -4,31 +4,44 @@
     <br>
     <a ng-href="#!/">Volver</a>
     <br>
-    Origen: {{vuelosOrigen}} Destino: {{vuelosDestino}} Billetes: {{numBilletes}}
+    Origen: {{vuelosOrigen}} Destino: {{vuelosDestino}} 
     <br>
     Salida: {{fechaIda | date:'dd/MM/yyyy'}} 
     <br>
     Llegada: {{fechaVuelta | date:'dd/MM/yyyy'}}
     <br>
+    <div class="label-group">
+        <span class="label">PASAJEROS</span>
+        <input class="input" type="number" min="1" max="100" value="1" ng-change="numBilletes = inputBilletes" ng-model="inputBilletes" ng-init="inputBilletes = numBilletes">
+    </div>
 
-    <div ng-click="soloIda = !soloIda">Solo ida: {{soloIda}}</div>
-   
+    <span>
+        <input type="radio" id="ida" name="flight-type" value="one-way" ng-click="soloIda = true">
+        <b>Solo ida</b>
+    </span>
+
+    <span class="col-md-6">
+        <input type="radio" id="idaVuelta" name="flight-type" value="roundtrip" ng-click="soloIda = false" checked>
+        <b>Ida y vuelta</b>
+    </span>
+
     <table ng-show="soloIda">
         <tr>
             <th ng-click="setOrder('vuelo')"> Vuelo </th>
-            <th ng-click="setOrder('salida')"> Salida </th>
-            <th ng-click="setOrder('llegada')"> Llegada </th>
+            <th ng-click="setOrder('salida')"> Hora de salida </th>
             <th> Precio business </th>
             <th> Precio óptimo </th>
             <th> Precio economy </th>
         </tr>
         <tr ng-if="dateManager(item)" ng-repeat="item in data | filter: {'origen' : vuelosOrigen} | filter: {'destino' : vuelosDestino} | orderBy:selectedOrder">
             <td>{{item.vuelo}}</td>
-            <td>{{item.salida | date:'dd/MM/yyyy'}}</td>
-            <td>{{item.llegada | date:'dd/MM/yyyy'}}</td>
-            <td>{{item.bussiness}}</td>
-            <td>{{item.optima}}</td>
-            <td>{{item.economy}}</td>
+            <td>{{horaIda}}</td>
+            <td>{{precioBus}} €</td>
+            <td>{{precioOpt}} €</td>
+            <td>{{precioEco}} €</td>
+            <td><button ng-click="comprar(precioBus)">Comprar business</button></td>
+            <td><button ng-click="comprar(precioOpt)">Comprar óptima</button></td>
+            <td><button ng-click="comprar(precioEco)">Comprar economy</button></td>
         </tr>
     </table>
 
@@ -43,12 +56,12 @@
         <tr ng-if="dateManager(item)" ng-repeat="item in data | filter: {'origen' : vuelosOrigen} | filter: {'destino' : vuelosDestino} | orderBy:selectedOrder">
             <td>{{stringIda}}</td>
             <td>{{stringVuelta}}</td>
-            <td>{{item.bussiness}}</td>
-            <td>{{item.optima}}</td>
-            <td>{{item.economy}}</td>
-            <td><button>Comprar business</button></td>
-            <td><button>Comprar óptima</button></td>
-            <td><button>Comprar economy</button></td>
+            <td>{{precioBus}} €</td>
+            <td>{{precioOpt}} €</td>
+            <td>{{precioEco}} €</td>
+            <td><button ng-click="comprar(precioBus)">Comprar business</button></td>
+            <td><button ng-click="comprar(precioOpt)">Comprar óptima</button></td>
+            <td><button ng-click="comprar(precioEco)">Comprar economy</button></td>
         </tr>
     </table>
 </body>
