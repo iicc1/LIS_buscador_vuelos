@@ -11,23 +11,19 @@
     Llegada: {{fechaVuelta | date:'dd/MM/yyyy'}}
     <br>
 
-   Solo ida: {{soloIda}}
+    <div ng-click="soloIda = !soloIda">Solo ida: {{soloIda}}</div>
    
-    <table ng-if="soloIda">
+    <table ng-show="soloIda">
         <tr>
             <th ng-click="setOrder('vuelo')"> Vuelo </th>
-            <th ng-click="setOrder('origen')"> Origen </th>
-            <th ng-click="setOrder('destino')"> Destino </th>
             <th ng-click="setOrder('salida')"> Salida </th>
             <th ng-click="setOrder('llegada')"> Llegada </th>
             <th> Precio business </th>
             <th> Precio óptimo </th>
             <th> Precio economy </th>
         </tr>
-        <tr ng-if="dateManager(item.salida)" ng-repeat="item in data | filter: {'origen' : vuelosOrigen} | filter: {'destino' : vuelosDestino} | orderBy:selectedOrder">
+        <tr ng-if="dateManager(item)" ng-repeat="item in data | filter: {'origen' : vuelosOrigen} | filter: {'destino' : vuelosDestino} | orderBy:selectedOrder">
             <td>{{item.vuelo}}</td>
-            <td>{{item.origen}}</td>
-            <td>{{item.destino}}</td>
             <td>{{item.salida | date:'dd/MM/yyyy'}}</td>
             <td>{{item.llegada | date:'dd/MM/yyyy'}}</td>
             <td>{{item.bussiness}}</td>
@@ -35,8 +31,8 @@
             <td>{{item.economy}}</td>
         </tr>
     </table>
-    
-    <table ng-if="!soloIda">
+
+    <table ng-show="!soloIda">
         <tr>
             <th ng-click="setOrder('vuelo')"> Vuelo de ida </th>
             <th ng-click="setOrder('origen')"> Vuelo de vuelta </th>
@@ -44,9 +40,9 @@
             <th> Precio óptimo </th>
             <th> Precio economy </th>
         </tr>
-        <tr ng-repeat="item in data | filter: {'origen' : vuelosOrigen} , {'origen' : vuelosDestino} | filter: {'destino' : vuelosDestino} , {'destino' : vuelosOrigen} | orderBy:selectedOrder">
-            <td>{{item.origen}}</td>
-            <td>{{item.destino}}</td>
+        <tr ng-if="dateManager(item)" ng-repeat="item in data | filter: {'origen' : vuelosOrigen} | filter: {'destino' : vuelosDestino} | orderBy:selectedOrder">
+            <td>{{stringIda}}</td>
+            <td>{{stringVuelta}}</td>
             <td>{{item.bussiness}}</td>
             <td>{{item.optima}}</td>
             <td>{{item.economy}}</td>
@@ -55,5 +51,4 @@
             <td><button>Comprar economy</button></td>
         </tr>
     </table>
-
 </body>
