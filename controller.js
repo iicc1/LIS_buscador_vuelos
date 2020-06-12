@@ -10,6 +10,8 @@ var arrayVuelos = [];
 var vuelosIda = [];
 var vuelosVuelta = [];
 
+
+
 // Asignación de direcciones y controladores
 app.config(function($routeProvider) { 
     $routeProvider. 
@@ -31,6 +33,10 @@ app.controller("mainCtrl", function($scope){
     // Guarda en variables globales los valores de las variables del scope
     // para pasarlas a la página de vuelos.
 
+            $scope.in = 0;
+        $scope.precioBus_2 = [];
+        $scope.precioOpt_2 = [];
+        $scope.precioEco_2 = [];
     $scope.initialize = function() {
 
     }
@@ -73,6 +79,9 @@ app.controller("vuelosCtrl", function($scope,$routeParams,$http){
 
         $scope.stringIda = "";
         $scope.stringVuelta = "";
+        
+        
+
     }
 
     // Origen del vuelo
@@ -122,7 +131,7 @@ app.controller("vuelosCtrl", function($scope,$routeParams,$http){
 
     // Buscador de vuelos
 
-    $scope.dateManager = function(item) {
+    $scope.dateManagerIda = function(item) {
         var out = false;
 
         // Tomamos el día de salida seleccionado, ajustando para el cambio horario
@@ -134,7 +143,7 @@ app.controller("vuelosCtrl", function($scope,$routeParams,$http){
         // Igual pero para el vuelo de salida
         var formatIdaVuelo = item.salida.slice(0,10);
 
-        if($scope.soloIda) {
+
             // Si es un billete de solo ida
             if(formatIdaSeleccionada == formatIdaVuelo) {
                 $scope.precioBus = item.bussiness * $scope.numBilletes;
@@ -145,7 +154,23 @@ app.controller("vuelosCtrl", function($scope,$routeParams,$http){
             } else {
                 out = false;
             }
-        } else {
+         return out;
+    }
+    
+    
+    $scope.dateManagerIdaVuelta = function(item,a) {
+        var out = false;
+        var aux = true;
+
+        // Tomamos el día de salida seleccionado, ajustando para el cambio horario
+        var formatIdaSeleccionada = new Date(fechaIda.slice(4,15));
+        formatIdaSeleccionada.setDate(formatIdaSeleccionada.getDate() + 1);
+        formatIdaSeleccionada = formatIdaSeleccionada.toISOString();
+        formatIdaSeleccionada = formatIdaSeleccionada.slice(0,10);
+
+        // Igual pero para el vuelo de salida
+        var formatIdaVuelo = item.salida.slice(0,10);
+
             // Si es de ida y vuelta
 
             // Tomamos el día de vuelta seleccionado
@@ -167,9 +192,11 @@ app.controller("vuelosCtrl", function($scope,$routeParams,$http){
                 // Ahora iteramos los posibles vuelos de regreso y nos quedamos con aquellos que salgan el día de regreso seleccionado
                 for (var i = 0 ; i < vuelosVuelta.length ; i++) {
                     var formatVueltaVuelo = vuelosVuelta[i].salida.slice(0,10);
-
+                        
+                    console.log(a);
                     // ¿La vuelta coincide?
                     if(formatVueltaSeleccionada == formatVueltaVuelo) {
+                            
                         $scope.idVuelta = vuelosVuelta[i].vuelo;
                         $scope.horaVuelta = vuelosVuelta[i].salida.slice(11,16);
 
@@ -178,21 +205,78 @@ app.controller("vuelosCtrl", function($scope,$routeParams,$http){
                         $scope.stringVuelta = $scope.idVuelta.concat(" / ").concat($scope.horaVuelta);
 
                         out = true;
-                        $scope.precioBus = (item.bussiness + vuelosVuelta[i].bussiness) * $scope.numBilletes;
-                        $scope.precioOpt = (item.optima + vuelosVuelta[i].optima) * $scope.numBilletes;
-                        $scope.precioEco = (item.economy + vuelosVuelta[i].economy) * $scope.numBilletes;
+                        
+                        
+                        
+                        $scope.precioBus_2[a] = (item.bussiness + vuelosVuelta[i].bussiness) * $scope.numBilletes;
+                        $scope.precioOpt_2[a] = (item.optima + vuelosVuelta[i].optima) * $scope.numBilletes;
+                        $scope.precioEco_2[a] = (item.economy + vuelosVuelta[i].economy) * $scope.numBilletes;
+
+                        console.log($scope.precioBus_2[a]);
+                        console.log($scope.precioOpt_2[a]);
+                        console.log($scope.precioEco_2[a]);
+                        
+                        if (aux) {
+                            //break;
+                        }
+
                     }
+                    
+
                 }
+
+                                    
             } else {
                 out = false;
             }
 
-        }
+        
+    //    $scope.index = 0;
         return out;
     }
 
     $scope.comprar = function(precio) {
-        console.log(precio);
+        
+      //  console.log(precio);
+        alert(precio+"€ !");
     }
 
+    $scope.comprarBussines = function(item) {
+        
+      //  console.log(precio);
+        alert((item.bussiness * $scope.numBilletes)+" € !");
+    }
+    
+    $scope.comprarOptima = function(item) {
+        
+      //  console.log(precio);
+        alert((item.optima * $scope.numBilletes)+" € !");
+    }
+    
+    $scope.comprarEconomy = function(item) {
+        
+      //  console.log(precio);
+        alert((item.economy * $scope.numBilletes)+" € !");
+    }
+    
+    
+    
+    $scope.comprarBussines_2 = function(a) {
+        
+      //  console.log(precio);
+        alert($scope.precioBus_2[a]+" € !");
+    }
+    
+    $scope.comprarOptima_2 = function(a) {
+        
+      //  console.log(precio);
+        alert($scope.precioOpt_2[a]+" € !");
+    }
+    
+    $scope.comprarEconomy_2 = function(a) {
+        
+      //  console.log(precio);
+        alert($scope.precioEco_2[a]+" € !");
+    }
+    
 });

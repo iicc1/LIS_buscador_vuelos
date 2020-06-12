@@ -1,33 +1,19 @@
 <form novalidate name="userInput">
 
-    <div id="reserva" class="section">
-		<div class="section-center">
+    <div id="reserva" class="body-responsive body-view">
+		<div class="center-inpur-output-container">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-4">
-						<div class="reserva-txt">
+						<div class="semantic-txt">
 							<h1>RESERVA DE BILLETES DE AVIÓN</h1>
 							<p>Laboratorio de Ingeniería de Software. Segundo trabajo de la asignatura: AngularJS</p>
 						</div>
 					</div>
-					<div class="col">
+                    <div class="col-md-1"></div>
+					<div class="col-md-7">
 						<div class="form">
 							<form>
-                                <div class="row">
-                                    <div class="col">
-                                       <!--
-                                        <span>
-                                            <input type="radio" id="ida" name="flight-type" value="one-way" ng-click="updateTipoBillete('true')" ng-model="inputIda">
-                                            <b>Solo ida</b>
-                                        </span>
-
-                                        <span class="col-md-6">
-                                            <input type="radio" id="idaVuelta" name="flight-type" value="roundtrip" ng-click="updateTipoBillete('false')" ng-model="inputIdaVuelta">
-                                            <b>Ida y vuelta</b>
-                                        </span>
-                                        -->
-                                    </div>
-								</div>
                                 
                                 <br>
                                 
@@ -35,13 +21,13 @@
 									<div class="col-md-6">
 										<div class="label-group">
 											<span class="label">ORIGEN</span>
-                                            <input class="input" type="text" placeholder="Ciudad" ng-model="inputOrigen">
+                                            <input class="input" type="text" placeholder="Ciudad" ng-model="inputOrigen" required>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="label-group">
 											<span class="label">DESTINO</span>
-                                            <input class="input" type="text" placeholder="Ciudad" ng-model="inputDestino">
+                                            <input class="input" type="text" placeholder="Ciudad" ng-model="inputDestino" required>
 										</div>
 									</div>
 								</div>
@@ -50,13 +36,13 @@
 									<div class="col-md-6">
 										<div class="label-group">
 											<span class="label">SALIDA</span>
-                                            <input class="input" type="date" ng-change="updateFechaIda()" ng-model="inputIda">
+                                            <input class="input" type="date" ng-change="updateFechaIda()" ng-model="inputIda" required>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="label-group">
 											<span class="label">LLEGADA</span>
-                                            <input class="input" type="date" ng-change="updateFechaVuelta()" ng-model="inputVuelta">
+                                            <input class="input" type="date" ng-change="updateFechaVuelta()" ng-model="inputVuelta" required>
 										</div>
 									</div>
 								</div>
@@ -65,14 +51,14 @@
 									<div class="col-md-4">
 										<div class="label-group">
 											<span class="label">PASAJEROS</span>
-                                            <input class="input" type="number" min="1" max="100" value="1" ng-change="updateBilletes()" ng-model="inputBilletes">
+                                            <input class="input" type="number" min="1" max="100" value="1" ng-change="updateBilletes()" ng-model="inputBilletes" required>
 										</div>
 									</div>
 									<div class="col-md-4"></div>
                                     <div class="col-md-4">
                                         <div class="form-btn">
-                                            <button class="submit-btn">VUELOS DISPONIBLES</button>
-                                            <a ng-href="#!/listaVuelos/{{inputOrigen}}/{{inputDestino}}">BUSCAR</a>
+                                            <a ng-href="#!/listaVuelos/{{inputOrigen}}/{{inputDestino}}" >
+                                            <button class="submit-btn" [disabled]="inputOrigen.errors?.required || inputDestino.errors?.required || inputIda.errors?.required || inputVuelta.errors?.required || inputBilletes.errors?.required" >                         VUELOS DISPONIBLES</button></a>
                                         </div>
 									</div>
 								</div>

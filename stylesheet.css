@@ -1,9 +1,33 @@
-.section {
+
+
+/* Diseño responsive aplicado como clase "body-responsive" al contenedor de más alto nivel de la vista "main.html", y al body de la vista "vuelos.html".
+
+*/
+.body-responsive {
 	position: relative;
 	height: 100vh;
 }
 
-.section .section-center {
+
+/* Diseño aplicado como clase "body-view" para ajustar y centrar la imágen de fondo de la aplicación.
+*/
+.body-view {
+	background-image: url('https://images.squarespace-cdn.com/content/v1/594336f837c5819eb6378ac7/1572276068069-1CN49Z6YO9Y4FO8A15RX/ke17ZwdGBToddI8pDm48kLkXF2pIyv_F2eUT9F60jBl7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0iyqMbMesKd95J-X4EagrgU9L3Sa3U8cogeb0tjXbfawd0urKshkc5MgdBeJmALQKw/view+out+the+window+of+a+plane+flying+over+glaciers+and+turquoise+lakes?format=1500w');
+	background-size: cover;
+	background-position: center;
+}
+
+
+
+
+/* Para encuadrar la sección central de entrada y salida de datos de la aplicación se han utilizado las clases "row", "col" y "col-md-x" de bootstrap
+*/
+
+
+/* Diseño aplicado al contenedor principal de la aplicación para que este quede centrado en la página, esta regla funciona en chrome y en firefox.
+*/
+
+.center-inpur-output-container {
 	position: absolute;
 	top: 50%;
 	left: 0;
@@ -12,69 +36,95 @@
 	transform: translateY(-50%);
 }
 
-#reserva {
-	background-image: url('https://images.squarespace-cdn.com/content/v1/594336f837c5819eb6378ac7/1572276068069-1CN49Z6YO9Y4FO8A15RX/ke17ZwdGBToddI8pDm48kLkXF2pIyv_F2eUT9F60jBl7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0iyqMbMesKd95J-X4EagrgU9L3Sa3U8cogeb0tjXbfawd0urKshkc5MgdBeJmALQKw/view+out+the+window+of+a+plane+flying+over+glaciers+and+turquoise+lakes?format=1500w');
-	background-size: cover;
-	background-position: center;
-	color: #191a1e;
-}
 
-.reserva-txt {
+
+
+/* Estilo para el texto descriptivo: ajuste de la altura en el posicionamiento del contenedor.
+*/
+.semantic-txt {
 	margin-top: 45px;
 }
 
-.reserva-txt h1 {
-	font-size: 52px;
-	color: #4fa3e3;
-	font-weight: 400;
+/* Estilo para el encabezado del texto descriptivo
+*/
+.semantic-txt h1 {
+	font-size: 50px;
+	color:cornflowerblue;
+    font-weight: bold;
 }
 
-.reserva-txt p {
-	font-size: 22px;
-	color: #191a1e;
+/* Estilo para el párrafo de texto descriptivo
+*/
+.semantic-txt p {
+	font-size: 24px;
+
 }
+
+
+/* Diseño aplicado al contenedor del formulario de entrada de datos y a la tabla de salida de datos de la aplicación.
+*/
 
 .form {
 	position: relative;
-	background: #fff;
-	max-width: 642px;
+	background: white;
+	max-width: 660px;
 	width: 100%;
-	margin: auto;
     opacity: 0.95;
-	padding: 45px 25px 25px;
-	border-radius: 4px;
-    -webkit-box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
-	box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
+	padding-top: 45px;
+    padding-right: 25px;
+    padding-left: 25px;
+    padding-bottom: 45px;
+    border-radius: 4px;
+    
 }
 
+/* Diseño común aplicado a los tags input para la entrada de datos de la aplicación.
+*/
 .input {
-	background-color: #fff;
-	height: 65px;
+    height: 65px;
     width: 100%;
-	padding: 0px 15px;
+    padding-right: 15px;
+	padding-left: 15px;
 	padding-top: 24px;
-	color: #191a1e;
-	border: 2px solid #dfe5e9;
+    color: black;
+	border: 2px solid lightgray;
 	font-size: 16px;
-	font-weight: 700;
-	-webkit-box-shadow: none;
-	box-shadow: none;
-	border-radius: 4px;
-	-webkit-transition: 0.2s all;
-	transition: 0.2s all;
+	font-weight: bold;
+    border-radius: 4px;
 }
 
+/* Estilo de los inputs antes de introducir datos en campo de texto (chrome y firefox)
+*/
 .input::-webkit-input-placeholder {
-	color: #dfe5e9;
+	color: lightgray;
 }
 
 .input:-ms-input-placeholder {
-	color: #dfe5e9;
+	color: lightgray;
 }
 
-input.input {
-	color: #dfe5e9;
+/* Estilo de los inputs antes de introducir datos en campo de fecha (chrome y firefox)
+*/
+
+input[type="date"]:invalid::-webkit-datetime-edit {
+    color: lightgray;
 }
+
+input[type="date"]:invalid::-ms-datetime-edit {
+    color: lightgray;
+}
+
+/* Posicionamiento de las etiquetas que describen los inputs
+*/
+
+.label-group {
+	position: relative;
+	margin-bottom: 20px;
+}
+
+
+/* Estilo de las etiquetas que describen los inputs
+*/
 
 .label {
 	position: absolute;
@@ -84,21 +134,55 @@ input.input {
 	line-height: 24px;
 	height: 24px;
 	font-size: 12px;
-	color: #98c9ee;
+	color: cornflowerblue;
     margin-bottom: 20px;
 }
 
-.label-group {
-	position: relative;
-	margin-bottom: 20px;
+
+/* Tamaño de fuente de la salida de datos en la tabla
+*/
+
+.table-style {
+    font-size: medium;
+    font-weight: bold;
+
+    text-align: center;
+    align-self: center;
 }
 
+.cell-style {
+    font-size: small;
+
+    text-align: center;
+    align-self: center;
+}
+
+/* Estilo tabla aplicado a los tags table para la salida de datos de la aplicación
+*/
+.table {
+  display: table;
+    
+}
+
+/* Bootstrap button
+*/
 .submit-btn {
 	color: #fff;
-	background-color: #4fa3e3;
+	background-color: cornflowerblue;
 	font-weight: 400;
 	height: 65px;
 	font-size: 18px;
+	border: none;
+	width: 100%;
+	border-radius: 4px;
+}
+
+.btn {
+	color: #fff;
+	background-color: cornflowerblue;
+	font-weight: 200;
+	height: auto;
+	font-size: 14px;
 	border: none;
 	width: 100%;
 	border-radius: 4px;
