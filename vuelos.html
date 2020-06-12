@@ -6,9 +6,9 @@
     <br>
     Origen: {{vuelosOrigen}} Destino: {{vuelosDestino}} 
     <br>
-    Salida: {{fechaIda | date:'dd/MM/yyyy'}} 
+    {{fechaIda | date : "'Ida: 'd/MM/y"}}
     <br>
-    Llegada: {{fechaVuelta | date:'dd/MM/yyyy'}}
+    {{fechaVuelta | date : "'Vuelta: 'd/MM/y"}}
     <br>
     <div class="label-group">
         <span class="label">PASAJEROS</span>
@@ -39,9 +39,9 @@
             <td>{{precioBus}} €</td>
             <td>{{precioOpt}} €</td>
             <td>{{precioEco}} €</td>
-            <td><button ng-click="comprar(precioBus)">Comprar business</button></td>
-            <td><button ng-click="comprar(precioOpt)">Comprar óptima</button></td>
-            <td><button ng-click="comprar(precioEco)">Comprar economy</button></td>
+            <td><button ng-click="comprar(0,$index)">Comprar business</button></td>
+            <td><button ng-click="comprar(1,$index)">Comprar óptima</button></td>
+            <td><button ng-click="comprar(2,$index)">Comprar economy</button></td>
         </tr>
     </table>
 
@@ -59,9 +59,11 @@
             <td>{{precioBus}} €</td>
             <td>{{precioOpt}} €</td>
             <td>{{precioEco}} €</td>
-            <td><button ng-click="comprar(precioBus)">Comprar business</button></td>
-            <td><button ng-click="comprar(precioOpt)">Comprar óptima</button></td>
-            <td><button ng-click="comprar(precioEco)">Comprar economy</button></td>
+            <td><button ng-click="comprar(0,index)">Comprar business</button></td>
+            <td><button ng-click="comprar(1,index)">Comprar óptima</button></td>
+            <td><button ng-click="comprar(2,index)">Comprar economy</button></td>
         </tr>
     </table>
+    
+    <div ng-show="showBilleteComprado">Billetes comprados</div>
 </body>

@@ -66,19 +66,26 @@ app.controller("vuelosCtrl", function($scope,$routeParams,$http){
             $scope.numBilletes = billetes;
         }
 
-        $scope.fechaIda = fechaIda;
-        $scope.fechaVuelta = fechaVuelta;
+        $scope.fechaIda = new Date(fechaIda.slice(4,15));
+        $scope.fechaVuelta = new Date(fechaVuelta.slice(4,15));
 
         $scope.soloIda = soloIda;
 
         $scope.stringIda = "";
         $scope.stringVuelta = "";
+
+        // Array de precios de cada opción
+        $scope.precios = [];
+        $scope.itemCounter = 0;
+        
+        $scope.showBilleteComprado = false;
     }
 
     // Origen del vuelo
     $scope.vuelosOrigen = $routeParams.orig;
     // Destino del vuelo
     $scope.vuelosDestino = $routeParams.dest;
+
 
     $scope.data = {};
     $scope.error = "JSON cargado con éxito";
@@ -124,6 +131,7 @@ app.controller("vuelosCtrl", function($scope,$routeParams,$http){
 
     $scope.dateManager = function(item) {
         var out = false;
+        
 
         // Tomamos el día de salida seleccionado, ajustando para el cambio horario
         var formatIdaSeleccionada = new Date(fechaIda.slice(4,15));
@@ -141,6 +149,12 @@ app.controller("vuelosCtrl", function($scope,$routeParams,$http){
                 $scope.precioOpt = item.optima * $scope.numBilletes;
                 $scope.precioEco = item.economy * $scope.numBilletes;
                 $scope.horaIda = item.salida.slice(11,16);
+
+                $scope.precios[$scope.itemCounter] = [$scope.precioBus , $scope.precioOpt , $scope.precioEco];
+
+                console.log($scope.precios);
+                $scope.itemCounter += 1;
+
                 out = true;
             } else {
                 out = false;
@@ -188,11 +202,15 @@ app.controller("vuelosCtrl", function($scope,$routeParams,$http){
             }
 
         }
+        //console.log($scope.precios);
         return out;
     }
 
-    $scope.comprar = function(precio) {
-        console.log(precio);
+    $scope.comprar = function(precio,opcion) {
+        $scope.itemCounter = 0;
+        console.log(opcion);
+        console.log($scope.precios[precio][opcion]);
+        $scope.showBilleteComprado = true;
     }
 
 });
