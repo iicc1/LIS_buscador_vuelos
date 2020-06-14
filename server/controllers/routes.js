@@ -1,5 +1,7 @@
+const middleware = require('./middleware')
 const comprar = require('../models/comprar')
 const vuelos = require('../models/vuelos')
+const auth = require('../models/auth')
 
 const router = app => {
   app.get('/', async (request, response) => {
@@ -36,16 +38,36 @@ const router = app => {
     response.send(reply)
   })
 
-  app.post('/login', async (request, response) => {
+  app.post('/registro', async (request, response) => {
+    console.log(request.body)
     const reply = {}
-    reply.success = true
+    try {
+      reply.success = true
+      reply.result = await auth.register(request.body.email, request.body.password)
+    } catch (error) {
+      reply.success = false
+      reply.message = error.message
+    }
     response.send(reply)
   })
 
-  app.post('/registro', async (request, response) => {
+  app.post('/login', async (request, response) => {
+    console.log(request.body)
     const reply = {}
-    reply.success = true
+    try {
+      reply.success = true
+      reply.result = await auth.login(request.body.email, request.body.password)
+    } catch (error) {
+      reply.success = false
+      reply.message = error.message
+    }
     response.send(reply)
+  })
+
+  // Ruta con middleware para probar la autenticación del token
+  app.get('/testToken', middleware.checkToken, async (request, response) => {
+    console.log(request.userId)
+    response.send('El userId es: ' + request.userId)
   })
 }
 
