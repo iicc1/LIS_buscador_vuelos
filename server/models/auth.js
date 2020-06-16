@@ -1,7 +1,6 @@
 const mysql = require('../helpers/mysql')
 const bcrypt = require('bcrypt')
 const jwt = require('jwt-simple')
-const moment = require('moment')
 
 const register = async (email, password) => {
   // En el registro insertamos el email y el hash de la contraseña
@@ -14,7 +13,9 @@ const login = async (email, password) => {
     throw new Error('No se ha introducido usuario y/o contraseña.')
   }
   // Extraemos los datos del usuario a partir del correo
-  const { userId, savedHash } = (await mysql.query('SELECT hash, user_id FROM users WHERE email = ? LIMIT 1', email))[0]
+  const searchResult = (await mysql.query('SELECT hash, user_id FROM users WHERE email = ? LIMIT 1', email))[0]
+  const userId = searchResult.user_id
+  const savedHash = searchResult.hash
   if (!savedHash) {
     throw new Error('El correo introducido no está registrado.')
   }
@@ -31,10 +32,11 @@ const login = async (email, password) => {
 
 // Creación de un token JWT a partir del userId
 const createToken = async (userId) => {
+  const now = new Date()
   const payload = {
     userId: userId,
-    createdAt: moment().unix(),
-    expiresAt: moment().add(1, 'day').unix()
+    createdAt: now,
+    expiresAt: now.setDate(now.getDate() + 7) // Autenticado durante una semana
   }
   return jwt.encode(payload, process.env.TOKEN_KEY)
 }

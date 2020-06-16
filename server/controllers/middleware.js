@@ -1,5 +1,4 @@
 const jwt = require('jwt-simple')
-const moment = require('moment')
 
 const checkToken = (request, response, next) => {
   // Extrae el token de los headers de la petición
@@ -22,8 +21,10 @@ const checkToken = (request, response, next) => {
     })
   }
 
+  console.log(payload)
+
   // Comprueba que el token no haya expirado
-  if (moment().unix() > payload.expiresAt) {
+  if (new Date().getTime() > payload.expiresAt) {
     return response.json({
       success: false,
       message: 'El token ha expirado.'
