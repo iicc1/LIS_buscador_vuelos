@@ -23,7 +23,7 @@ const vuelos = async (queryData) => {
   }
 
   // Tanto para ida y vuelta como para solo ida, necesitamos saber las salidas
-  let salidas = await mysql.query('SELECT vuelo, filtro_pasajeros.aerolinea_id, origen, destino, salida, llegada, precio_business, precio_optima, precio_economy, plazas_business, plazas_optima, plazas_economy, aerolineas.codigo AS codigo_aerolinea, aerolineas.nombre AS nombre_aerolinea ' +
+  let salidas = await mysql.query('SELECT vuelo_id AS vueloId, vuelo, filtro_pasajeros.aerolinea_id, origen, destino, salida, llegada, precio_business, precio_optima, precio_economy, plazas_business, plazas_optima, plazas_economy, aerolineas.codigo AS codigo_aerolinea, aerolineas.nombre AS nombre_aerolinea ' +
   'FROM (SELECT * FROM vuelos WHERE plazas_business >= ? OR plazas_optima >= ? OR plazas_economy >= ?) AS filtro_pasajeros ' +
   'INNER JOIN aerolineas ON aerolineas.aerolinea_id = filtro_pasajeros.aerolinea_id WHERE origen = ? AND destino = ? AND salida LIKE ?',
   [queryData.pasajeros, queryData.pasajeros, queryData.pasajeros, queryData.origen, queryData.destino, queryData.salida + '%'])
@@ -31,7 +31,7 @@ const vuelos = async (queryData) => {
   // Las llegadas se calculan como las idas pero cambiando el origen y destino de sitio y cambiando la fecha de salida por llegada
   let llegadas
   if (queryData.idaYvuelta === 'true') {
-    llegadas = await mysql.query('SELECT vuelo, filtro_pasajeros.aerolinea_id, origen, destino, salida, llegada, precio_business, precio_optima, precio_economy, plazas_business, plazas_optima, plazas_economy, aerolineas.codigo AS codigo_aerolinea, aerolineas.nombre AS nombre_aerolinea ' +
+    llegadas = await mysql.query('SELECT vuelo_id AS vueloId, vuelo, filtro_pasajeros.aerolinea_id, origen, destino, salida, llegada, precio_business, precio_optima, precio_economy, plazas_business, plazas_optima, plazas_economy, aerolineas.codigo AS codigo_aerolinea, aerolineas.nombre AS nombre_aerolinea ' +
     'FROM (SELECT * FROM vuelos WHERE plazas_business >= ? OR plazas_optima >= ? OR plazas_economy >= ?) AS filtro_pasajeros ' +
     'INNER JOIN aerolineas ON aerolineas.aerolinea_id = filtro_pasajeros.aerolinea_id WHERE origen = ? AND destino = ? AND salida LIKE ?',
     [queryData.pasajeros, queryData.pasajeros, queryData.pasajeros, queryData.destino, queryData.origen, queryData.llegada + '%'])

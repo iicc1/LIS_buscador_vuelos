@@ -33,11 +33,11 @@ const router = app => {
     response.send(reply)
   })
 
-  app.post('/comprar/:categoria/:vueloId', middleware.checkToken, async (request, response) => {
+  app.post('/comprar', middleware.checkToken, async (request, response) => {
     const reply = {}
     try {
       reply.success = true
-      reply.result = await comprar(request.body, request.params.categoria, request.params.vueloId, request.userId)
+      reply.result = await comprar(request.body.pasajero, request.body.categoria, request.body.vueloId, request.userId)
     } catch (error) {
       console.log(error)
       reply.success = false
