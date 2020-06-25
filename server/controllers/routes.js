@@ -1,5 +1,6 @@
 const middleware = require('./middleware')
 const comprar = require('../models/comprar')
+const compras = require('../models/compras')
 const cancelar = require('../models/cancelar')
 const vuelos = require('../models/vuelos')
 const auth = require('../models/auth')
@@ -38,6 +39,19 @@ const router = app => {
     try {
       reply.success = true
       reply.result = await comprar(request.body.pasajero, request.body.categoria, request.body.vueloId, request.userId)
+    } catch (error) {
+      console.log(error)
+      reply.success = false
+      reply.message = error.message
+    }
+    response.send(reply)
+  })
+
+  app.get('/compras', middleware.checkToken, async (request, response) => {
+    const reply = {}
+    try {
+      reply.success = true
+      reply.result = await compras(request.userId)
     } catch (error) {
       console.log(error)
       reply.success = false
