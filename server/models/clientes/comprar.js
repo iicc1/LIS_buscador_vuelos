@@ -1,4 +1,4 @@
-const mysql = require('../helpers/mysql')
+const mysql = require('../../helpers/mysql')
 
 const comprar = async (compras, categoria, vueloId, usuarioId) => {
   // Compras debe ser un array y debe tener al menos 1 elemento

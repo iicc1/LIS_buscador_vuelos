@@ -1,4 +1,4 @@
-const mysql = require('../helpers/mysql')
+const mysql = require('../../helpers/mysql')
 
 const vuelos = async (queryData) => {
   console.log('Datos entrantes', queryData)

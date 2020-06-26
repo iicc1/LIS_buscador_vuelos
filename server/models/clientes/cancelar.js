@@ -1,4 +1,4 @@
-const mysql = require('../helpers/mysql')
+const mysql = require('../../helpers/mysql')
 
 const cancelar = async (codigoReserva, usuarioId) => {
   // Sacamos el id de compra del pasajero para posteriormente saber a que vuelo corresponde y si está autorizado
