@@ -1,0 +1,70 @@
+<form novalidate name="userInput">
+
+
+    <div id="reserva" class="body-responsive body-view">
+		<div class="center-inpur-output-container">
+			<div class="container">
+                
+				<div class="row">
+					<div class="col-md-4">
+						<div class="profile">
+                            <div class="user">
+                                Cliente/Aerolínea
+                            </div>
+                            <br>
+                            <div>
+                                <div class="profile-label">
+                                    USUARIO
+                                </div>
+                                <div class="profile-data"><h1>{{user}}</h1></div>
+                            </div>
+
+
+						</div>
+					</div>
+                    
+                    <div class="col-md-1"></div>
+                    
+					<div class="col-md-7">
+                        
+                        <div ng-controller="fliesCtrl" class="flies"> Reservas <br><br><br>
+                            
+    <table class="carrito-style" ng-show="carrito">
+        <tr class="row">
+            <th class="col-md-3 table-style" >Vuelo</th>
+            <th class="col-md-3 table-style" >Hora de salida</th>
+            <th class="col-md-3 table-style" > Precio</th>
+        </tr>
+        <tr class="row" ng-repeat="item in profile_book">
+            <td class="col cell-style" >{{item.vuelo}}</td>
+            <td class="col cell-style" >{{item.salida}}</td>
+            <td class="col cell-style" >
+                <a ng-href="#!/edit">
+                    <button class="submit-btn">
+                        edit
+                    </button>
+                </a>
+            </td>
+            <td class="col cell-style" >
+                <a ng-href="#!/edit">
+                    <button class="submit-btn">
+                        cancel
+                    </button>
+                </a>
+            </td>
+           
+        </tr>
+    </table>
+                            
+                        </div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    
+</form>
+
+
+

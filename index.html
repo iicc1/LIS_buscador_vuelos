@@ -11,9 +11,98 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular-route.js"></script>
         <script src="controller.js"></script>
     </head>
+    
+    
+    
+    
     <body ng-controller="mainCtrl">
+          
+    <nav class="navbar mainmenu-area">
+        <div class="container">
 
-        <main ng-view></main>
+            
+                <div class="col-md-4" style="display: inline-block; align-content: center;">
+                                            <a href="#!/">
+                    <div class="row" style="display: table; margin-left: 2vh">
+
+
+                    <img style = "display: table-cell"src="https://images.vexels.com/media/users/3/153006/isolated/preview/d493f3010e38758f2fb094641baa0d0e-icono-de-trazo-de-color-billetes-de-avi--n-by-vexels.png">
+
+                        <div style="display:  table-cell; vertical-align: middle">
+                            <div class="name">
+                    Grupo 1
+                                </div>
+</div>
+
+                    </div>
+                                                                            </a>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-7">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="navigator">
+                                <a ng-href="#!">
+                            HOME
+                                </a>
+                            </div>
+                        </div>
+                    
+                        <div class="col-md-2">
+                            <div class="navigator">
+                                <a ng-href="#!">
+                            SEARCH
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-2">
+                            <div class="navigator">
+                                <a href="#!/listaVuelos/hjghj/fgjhg">
+                            NEWS
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-2">
+                            <div class="navigator">
+                                <a href="#!/edit/ORIGEN/DESTINO/DATE/CLIENTE">
+                                <!--a href="#!/edit/{{ORIGEN}}/{{DESTINO}}/{{DATE}}/{{CLIENTE}}"-->
+                                    PRICING
+                                </a>
+                                       
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-2">
+                            <div class="navigator">
+                                CONTACT
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-2">
+                            <div class="navigator">
+                                <a id="login-logout" href="#!/login">
+                                    <div id="login"></div>
+                                </a>
+                                <div id="name" ><a id="name-profile" href="#!/profile"></a>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                    
+
+        </div>
+    
+    </nav>
+        <div>
+
+            <main ng-view></main>
+    
+        </div>
 
     </body>
 </html>
