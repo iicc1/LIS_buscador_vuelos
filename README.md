@@ -1,7 +1,52 @@
 # LIS_buscador_vuelos
 
-Novedades:
-- Los colores han cambiado sensiblemente, los que he utilizado son predefinidos (para no ponerlos en hexadecimal), no quedan igual de bien, pero así el estilo de la página es más auténtico.
-- La búsqueda para vuelos de ida y vuelta solo funciona si los nombres de las ciudades se introducen tal cual aparecen en la base de datos (lo que se conoce técnicamente como "case sensitive", o sea si se introducen los nombres sin acentos o en minúscula la búsqueda de billetes de ida y vuelta no funcionará). No he arreglado esto porque le he dado prioridad a arreglar el bug de los precios.
-- El bug de los precios está arreglado: los precios para cada clase son ahora arrays a los que se accede con el índice que gobierna el bucle de ng-repeat.
-- El botón de buscar vuelos también ha dado problemas: si no se introducen las ciudades de origen y destino no se accede a la página de resultados, pero (1) si solo se introduce el origen (o el destino) y se pulsa el botón, aunque la página no avance, los nombres de las ciudades se borran (para la última entrega quiero arreglar eso), (2) si no se introducen fechas la búsqueda tendrá como origen y destino el día actual, tampoco he tenido tiempo de arreglar esto, o al menos de que aparezcan las fechas en la página de resultados junto a las ciudades de origen y destino, también queda pendiente para la práctica final, (3) si no se introduce el número de pasajeros, por defecto será uno.
+
+## Instalación del servidor en un VPS o en local
+
+### Base de datos
+__Es necesario tener Docker instalado__
+
+- Lanzamos un contenedor de MySQL como base de datos de la aplicación:
+
+  `docker run --name mysql_LIS -e MYSQL_ROOT_PASSWORD=<contraseña> -d mysql:8.0.1`
+
+- Lanzamos un contenedor de PHPMyAdmin, para administrar la base de datos gráficamente. Este contenedor está linkeado con el de la base de datos:
+
+  `docker run --name phpmyadmin_LIS -d --link mysql_LIS :db -p 8081:80 phpmyadmin/phpmyadmin`
+
+- Acceso a PHPMyAdmin, en un navegador:
+
+  `http://<ip del servidor>:8081`
+
+  Datos de login:
+
+  User: 
+`root
+`
+
+  Password: 
+`<contraseña>
+`
+
+
+### Servidor Node.js
+__Es necesario tener Node.js instalado__
+
+- Clonado del repositorio
+
+  `git clone https://github.com/iicc1/LIS_buscador_vuelos`
+
+- Variables de entorno
+
+  El servidor usa variables de entorno para las configuraciones principales. Se debe crear un archivo .env que contenga estas variables. El archivo env.example, contiene las variables existentes y valores por defecto.
+
+
+- Ejecutamos el servidor
+
+  `node server/server.js`
+
+  También se puede dejar en segundo plano mediante PM2
+
+  `pm2 start server/server.js --name "servidor_LIS"`
+
+  Para ello debe estar PM2 instalado globalmente en Node
