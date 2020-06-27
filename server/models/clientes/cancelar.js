@@ -11,8 +11,8 @@ const cancelar = async (codigoReserva, usuarioId) => {
   // Una vez comprobado que el usuario que quiere cancelar es el mismo usuario que lo compró, podemos borrar la fila de pasajeros
   await mysql.query('DELETE FROM pasajeros WHERE cod_reserva = ?', codigoReserva)
   // A continuación añadimos un billete en el vuelo y categoría que corresponda ya que hay una plaza extra libre
-  if (datosCompra.npas_businnes > 0) {
-    await mysql.query('UPDATE vuelos SET plazas_businnes = plazas_businnes + 1 WHERE vuelo_id = ?', datosCompra.vuelo_id)
+  if (datosCompra.npas_business > 0) {
+    await mysql.query('UPDATE vuelos SET plazas_business = plazas_business + 1 WHERE vuelo_id = ?', datosCompra.vuelo_id)
   } else if (datosCompra.npas_optima > 0) {
     await mysql.query('UPDATE vuelos SET plazas_optima = plazas_optima + 1 WHERE vuelo_id = ?', datosCompra.vuelo_id)
   } else if (datosCompra.npas_economy > 0) {
