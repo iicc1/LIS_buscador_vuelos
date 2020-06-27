@@ -1,67 +1,73 @@
-<body ng-controller="vuelosCtrl">
+<div ng-controller="vuelosCtrl">
+    <div class="body-responsive body-view">
+		<div class="center-inpur-output-container">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4">
+						<div class="semantic-txt">
+							<h1>RESERVA DE BILLETES DE AVIÓN</h1>
+							<p>Laboratorio de Ingeniería de Software. Segundo trabajo de la asignatura: AngularJS</p>
+						</div>
+					</div>
+                    
+                    <div class="col-md-1"></div>
+                    
+					<div class="col-md-7">
+						<div class="form">
+							<form>
+                                <div class="row">
+                                    <div class="col">
+                                        <a ng-href="#!/">Volver</a>
 
-    Estado: {{error}}
-    <br>
-    <a ng-href="#!/">Volver</a>
-    <br>
-    Origen: {{vuelosOrigen}} Destino: {{vuelosDestino}} 
-    <br>
-    Salida: {{fechaIda | date:'dd/MM/yyyy'}} 
-    <br>
-    Llegada: {{fechaVuelta | date:'dd/MM/yyyy'}}
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-3"> <div class="label">ORIGEN</div><br><div>{{origen}}</div></div>
+        <div class="col-3"> <div class="label">DESTINO</div><br><div>{{destino}}</div></div>
+        <div class="col-3"></div>
+    </div>
+    
     <br>
     <div class="label-group">
         <span class="label">PASAJEROS</span>
         <input class="input" type="number" min="1" max="100" value="1" ng-change="numBilletes = inputBilletes" ng-model="inputBilletes" ng-init="inputBilletes = numBilletes">
+        
     </div>
 
-    <span>
-        <input type="radio" id="ida" name="flight-type" value="one-way" ng-click="soloIda = true">
-        <b>Solo ida</b>
-    </span>
-
-    <span class="col-md-6">
-        <input type="radio" id="idaVuelta" name="flight-type" value="roundtrip" ng-click="soloIda = false" checked>
-        <b>Ida y vuelta</b>
-    </span>
-
-    <table ng-show="soloIda">
-        <tr>
-            <th ng-click="setOrder('vuelo')"> Vuelo </th>
-            <th ng-click="setOrder('salida')"> Hora de salida </th>
-            <th> Precio business </th>
-            <th> Precio óptimo </th>
-            <th> Precio economy </th>
+                           
+    <br>
+                                        
+    <div class="table-scroll">
+        <div>
+    <table class="table-striped">
+        <tr class="row">
+            <th class="col table-style">Vuelo</th>
+            <th class="col table-style">Hora de salida / llegada</th>
+            <th class="col table-style">Origen / Destino</th>
+            <th class="col-2 table-style" > Clase business </th>
+            <th class="col-2 table-style" > Clase óptima </th>
+            <th class="col-2 table-style" > Clase economy </th>
         </tr>
-        <tr ng-if="dateManager(item)" ng-repeat="item in data | filter: {'origen' : vuelosOrigen} | filter: {'destino' : vuelosDestino} | orderBy:selectedOrder">
-            <td>{{item.vuelo}}</td>
-            <td>{{horaIda}}</td>
-            <td>{{precioBus}} €</td>
-            <td>{{precioOpt}} €</td>
-            <td>{{precioEco}} €</td>
-            <td><button ng-click="comprar(precioBus)">Comprar business</button></td>
-            <td><button ng-click="comprar(precioOpt)">Comprar óptima</button></td>
-            <td><button ng-click="comprar(precioEco)">Comprar economy</button></td>
+        <tr class="row" ng-repeat="item in data ">
+            <td class="col cell-style" >{{item.vuelo}}<br>{{item.nombre_aerolinea}}</td>
+            <td class="col cell-style" >{{item.hora_salida}} <br> {{item.hora_llegada}}</td>
+            <td class="col cell-style" >{{item.origen}} <br> {{item.destino}}</td>
+            
+            <td class="col-2 cell-style">{{item.precio_business}} € <br> {{item.plazas_business}} plazas<button class="buy-btn" ng-click="comprarBusiness(item)">Comprar</button></td>
+            <td class="col-2 cell-style">{{item.precio_optima}} € <br> {{item.plazas_business}} plazas<button class="buy-btn" ng-click="comprarOptima(item)">Comprar</button></td>
+            <td class="col-2 cell-style">{{item.precio_economy}} € <br> {{item.plazas_business}} plazas <button class="buy-btn" ng-click="comprarEconomy(item)">Comprar</button></td>
         </tr>
     </table>
+            </div>
+        </div>
 
-    <table ng-show="!soloIda">
-        <tr>
-            <th ng-click="setOrder('vuelo')"> Vuelo de ida </th>
-            <th ng-click="setOrder('origen')"> Vuelo de vuelta </th>
-            <th> Precio business </th>
-            <th> Precio óptimo </th>
-            <th> Precio economy </th>
-        </tr>
-        <tr ng-if="dateManager(item)" ng-repeat="item in data | filter: {'origen' : vuelosOrigen} | filter: {'destino' : vuelosDestino} | orderBy:selectedOrder">
-            <td>{{stringIda}}</td>
-            <td>{{stringVuelta}}</td>
-            <td>{{precioBus}} €</td>
-            <td>{{precioOpt}} €</td>
-            <td>{{precioEco}} €</td>
-            <td><button ng-click="comprar(precioBus)">Comprar business</button></td>
-            <td><button ng-click="comprar(precioOpt)">Comprar óptima</button></td>
-            <td><button ng-click="comprar(precioEco)">Comprar economy</button></td>
-        </tr>
-    </table>
-</body>
+
+                                   </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>                                          
+            </div>
+        </div>                      
+    </div>                            
+</div>
