@@ -164,6 +164,8 @@ app.controller("createCtrl", function($scope,$routeParams,$http, $location){
     var plazas_economy;
     
     
+    $scope.user = name;
+    
     $scope.doCreate = function() {
         
         
@@ -252,9 +254,11 @@ app.controller("createCtrl", function($scope,$routeParams,$http, $location){
             $scope.$apply(function(){
 
                 success = true;
-                login_token = response.result.token;
+
+                
             });
                 
+            tes3();
 
         } else {
             alert("ERROR");
@@ -264,6 +268,82 @@ app.controller("createCtrl", function($scope,$routeParams,$http, $location){
         }
     }
 
+    
+
+    
+    
+     
+    
+    
+        
+    async function tes3() {
+        
+        var url = "http://51.15.247.76:3001/aerolineas/vuelos";
+
+        var responseO = await makeRequest3("GET", url);
+        console.log(responseO);
+        f3(responseO);
+    }
+    
+
+        function makeRequest3(method, url) {
+        
+        return new Promise(function (resolve, reject) {
+            let xhr = new XMLHttpRequest();
+            xhr.open(method, url);
+            console.log(login_token);
+            xhr.setRequestHeader("Auth-Token", login_token);
+
+            xhr.onload = function () {
+                if (this.status >= 200 && this.status < 300) {
+                    resolve(xhr.response);
+                    console.log(xhr.response);
+                } else {
+                    reject({
+                        status: this.status,
+                        statusText: xhr.statusText
+                    });
+                }
+            };
+            xhr.onerror = function () {
+                reject({
+                    status: this.status,
+                    statusText: xhr.statusText
+                });
+            };
+
+            xhr.send();
+        });
+    }
+    
+
+    
+    function f3(responseO) {
+        var response = JSON.parse(responseO);
+        console.log(response.result);
+        var bb = response.success;
+
+        if (bb) {
+            profile_a = response.result;
+            console.log(profile_a);
+            //logged = true;
+            
+            $scope.$apply(function(){
+                $location.path('/vuelos_aerolinea').replace();
+            })
+            
+            
+        } else {
+            alert("ERROR");
+            $scope.$apply(function(){
+                $location.path('/').replace();
+            })
+        }
+    }
+    
+    
+    
+    
     
     
     
@@ -286,27 +366,40 @@ app.controller("createCtrl", function($scope,$routeParams,$http, $location){
 
 app.controller("vuelosAerolineaCtrl", function($scope,$routeParams,$http, $location){
     
+    console.log(profile_a);
+    $scope.user = name;
+    
     
     if (success === true) {
         document.getElementById("login").innerHTML = "LOGOUT";
         document.getElementById("name-profile").innerHTML = name;
         document.getElementById("name").style = "display:inherit";
         document.getElementById("login-logout").setAttribute("href","#!/logout");
-        //document.getElementById("home_id").setAttribute("ng-href", "#!/vuelos_aerolinea");
+        document.getElementById("home_id").setAttribute("href", "#!/vuelos_aerolinea");
+        document.getElementById("name-profile").setAttribute("href", "#!/vuelos_aerolinea");
         
         
     } else {
         document.getElementById("login").innerHTML = "LOGIN";
     }
     
-    $scope.user = name;
+
+    if (JSON.stringify(profile_a) === "[]") {
+        
+    } else {
+    
     
     var vuelos3_aux = profile_a;
-    
+    console.log(profile_a);
     var vuelos3 = [];
+        
+    var len = 100;
+    if (vuelos3_aux.length < 100) {
+        len = vuelos3_aux.length;
+    }
     
     //for (var i = 0; i < vuelos3_aux.length; i++){
-    for (var i = 0; i < 100; i++){
+    for (var i = 0; i < len ; i++){
     
         vuelos3[i] = {};
         vuelos3[i] = vuelos3_aux[i];
@@ -317,6 +410,8 @@ app.controller("vuelosAerolineaCtrl", function($scope,$routeParams,$http, $locat
     
     
     $scope.data2 = vuelos3;
+        
+    }
     
     /*
     
@@ -458,7 +553,7 @@ app.controller("vuelosAerolineaCtrl", function($scope,$routeParams,$http, $locat
 
 app.controller("vuelosCtrl", function($scope,$routeParams,$http, $location){
     
-    if(!aerolinea) {
+    if(aerolinea === "false") {
     
     console.log(vuelos.salidas);
     console.log(billetes);
@@ -1244,6 +1339,8 @@ app.controller("bookingCtrl", function($scope, $location){
         
         console.log(cesta2);
         
+        
+        alert("Carrito actualizado");
     }
     
     
@@ -1286,6 +1383,8 @@ app.controller("mainCtrl", function($scope, $location){
         document.getElementById("name-profile").innerHTML = name;
         document.getElementById("name").style = "display:inherit";
         document.getElementById("login-logout").setAttribute("href","#!/logout");
+        document.getElementById("home_id").setAttribute("href", "#!");
+        document.getElementById("name-profile").setAttribute("href", "#!/profile");
         
     } else {
         document.getElementById("login").innerHTML = "LOGIN";
@@ -1431,6 +1530,10 @@ app.controller("logoutCtrl", function($scope, $location){
     document.getElementById("name").style = "display:none";
     document.getElementById("login-logout").setAttribute("href","#!/login");
     logged = false;
+    
+    
+    document.getElementById("home_id").setAttribute("href", "#!");
+    document.getElementById("name-profile").setAttribute("href", "#!/profile");
     $scope.$apply(function(){
         $location.path("/").replace();
     })
@@ -1507,7 +1610,7 @@ app.controller("loginCtrl", function($scope, $location){
         if (bb) {
             
             
-            if (aerolinea) {
+            if (aerolinea === "true") {
                 $scope.$apply(function(){
                     
                     name = $scope.login_email;
@@ -1520,6 +1623,7 @@ app.controller("loginCtrl", function($scope, $location){
                 
             } else {
             
+
             
             $scope.$apply(function(){
                 $location.path("/");
@@ -1668,16 +1772,6 @@ app.controller("loginCtrl", function($scope, $location){
             })
         }
     }
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
