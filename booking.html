@@ -47,14 +47,14 @@
                                         <div class="hide-click">
                                         <div class="label-group">
 											<span class="label">Nombre</span>
-                                            <input class="input" type="text" placeholder="{{Nombre}}" ng-change="" ng-model="inputName" required>
+                                            <input class="input" type="text" placeholder="{{Nombre}}" ng-change="updateName(inputName)" ng-model="inputName" required>
 										</div>
                                         </div>
                                         
                                         <div class="hide-click">
                                         <div class="label-group">
 											<span class="label">Apellidos</span>
-                                            <input class="input" type="text" placeholder="{{Apellidos}}" ng-change="" ng-model="inputSurname" required>
+                                            <input class="input" type="text" placeholder="{{Apellidos}}" ng-change="updateSurname(inputSurname)" ng-model="inputSurname" required>
 										</div>
 
  
@@ -73,28 +73,39 @@
                                             </div>
 										  </div>
 
+
+        
+
                                         </div>
+
+                                        
                                         
                                     
                                     </div>
+
                                         
                                     </div>
 
+                                                                <div class="row">
+                                <div class="col-md-6"></div>
+                                <div class="col-md-3" style="padding-right: 3vh; padding-top: 1.5vh">
+                                    <button ng-click="doChart(inputName,inputSurname)" class="submit-btn">
+                                        AÑADIR AL CARRITO 
+                                    </button>
                                     
+                                </div>
+                                <div class="col-md-3" style="padding-right: 3vh; padding-top: 1.5vh">
+                                    <button ng-click="goChart()" class="submit-btn">
+                                        IR AL CARRITO
+                                    </button>    
+                                </div>
+                                  
+                                
+                            </div>
                                     
                                     
                                 </div>
                             <div class="col-md-1"></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4"></div>
-                                <div class="col-md-4"></div>
-                                <div class="col-md-3" style="padding-right: 3vh; padding-top: 1.5vh">
-                                    <button ng-click="doBooking()" class="submit-btn">
-                                        Send
-                                    </button>
-                                    
-                                </div>
                             </div>
                         </div>
                     </div>

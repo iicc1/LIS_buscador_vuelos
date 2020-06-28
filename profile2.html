@@ -1,4 +1,4 @@
-<form novalidate name="userInput">
+<div ng-controller="profileCtrl">
 
 
     <div id="reserva" class="body-responsive body-view">
@@ -6,8 +6,13 @@
 			<div class="container">
                 
 				<div class="row">
-					<div class="col-md-4">
-						<div class="profile">
+                    
+                    
+                    
+                    <div class="col-md-4">
+                        <div class="row">
+                        <div class="col-md-11">
+                            <div class="profile">
                             <div class="user">
                                 Cliente/Aerolínea
                             </div>
@@ -21,40 +26,65 @@
 
 
 						</div>
-					</div>
-                    
-                    <div class="col-md-1"></div>
-                    
-					<div class="col-md-7">
-                        
-                        <div ng-controller="fliesCtrl" class="flies"> Reservas <br><br><br>
                             
-    <table class="carrito-style" ng-show="carrito">
+                            
+                            
+
+                        </div>
+                                            
+                                    
+                            <div class="col-md-1"></div>         
+                        </div>
+                    </div>
+                             
+					<div class="col-md-8">
+                    
+                    
+                
+                        
+                        <div class="flies"> Reservas <br><br><br>
+                                <div class="table-scroll">
+    <table class="carrito-style table-striped" >
         <tr class="row">
-            <th class="col-md-3 table-style" >Vuelo</th>
-            <th class="col-md-3 table-style" >Hora de salida</th>
-            <th class="col-md-3 table-style" > Precio</th>
+            <th class="col-md-2 table-style" >Vuelo</th>
+            <th class="col-md-3 table-style" >Origen / Destino</th>           
+            <th class="col-md-3 table-style" >Salida / Llegada</th>
+            <th class="col-md-2 table-style" >Pasajero</th>
+            <th class="col-md-1 table-style" >Detalles</th>         
+            
+
         </tr>
-        <tr class="row" ng-repeat="item in profile_book">
-            <td class="col cell-style" >{{item.vuelo}}</td>
-            <td class="col cell-style" >{{item.salida}}</td>
-            <td class="col cell-style" >
-                <a ng-href="#!/edit">
-                    <button class="submit-btn">
-                        edit
-                    </button>
-                </a>
-            </td>
-            <td class="col cell-style" >
-                <a ng-href="#!/edit">
-                    <button class="submit-btn">
-                        cancel
-                    </button>
-                </a>
-            </td>
-           
+        
+        <tr class="row" ng-repeat="i in cesta2">
+
+
+            <td class="col-md-2 cell-style" style="font-size: smaller ">{{i.vueloId}}<br>{{i.aerolinea}}</td>
+            <td class="col-md-3 cell-style" >{{i.origen}} <br> {{i.destino}}</td>
+            <td class="col-md-3 cell-style" >{{i.hora_salida}} <br> {{i.hora_llegada}}</td>
+            <td class="col-md-2 cell-style" >{{i.nombre}}<br>{{i.apellidos}}</td>
+            <td class="col-md-1 cell-style" >{{i.categoria}} <br> {{i.precio}}</td>
+
+            
         </tr>
     </table>
+                                    
+                            <div class="row">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-3"></div>
+                                <div class="col-md-3" style="padding-right: 3vh; padding-top: 1.5vh">
+                                    <button ng-click="doReturn()" class="submit-btn">
+                                        SEGUIR COMPRANDO
+                                    </button>    
+                                </div>
+                                <div class="col-md-3" style="padding-right: 3vh; padding-top: 1.5vh">
+                                    <button ng-click="doBooking()" class="submit-btn">
+                                        REALIZAR COMPRA
+                                    </button>    
+                                </div>
+                            </div>
+                                    
+                                    
+                            </div>
                             
                         </div>
 						
@@ -64,7 +94,7 @@
 		</div>
 	</div>
     
-</form>
+</div>
 
 
 

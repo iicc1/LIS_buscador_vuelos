@@ -41,11 +41,16 @@ img {
     
 }
 
+
+.container2{
+    width: 120%;
+}
+
 .table-scroll {
     
     overflow-y: scroll;
     overflow-x: hidden;
-    max-height: 550px;
+    max-height: 450px;
 }
 
 .profile {
@@ -193,7 +198,7 @@ a:hover {
 .form {
 	position: relative;
 	background: white;
-	max-width: 660px;
+	max-width: 760px;
 	width: 100%;
     opacity: 0.95;
 	padding-top: 45px;

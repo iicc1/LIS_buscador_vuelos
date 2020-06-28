@@ -7,6 +7,30 @@
         <div class="login-signup-container">
             <div class="login-signup-form">
                 <form>
+                    
+                    
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <span>
+                                <input type="radio" id="ida" name="flight-type" ng-click="updateLogType('false')">
+                                <b>Cliente</b>
+                            </span>
+
+                        </div>
+                        <div class="col-md-6">
+                            <span>
+                                <input type="radio" id="idaVuelta" name="flight-type" ng-click="updateLogType('true')">
+                                <b>Aerolínea</b>
+                            </span>
+                        </div>
+				    </div>
+                    
+                    
+                    <br>
+                    <br>
+                    
+                    
                     <input type="text" ng-model="login_email" placeholder="email"/>
                     <input type="password" ng-model="login_password" placeholder="password"/>    
                     <button ng-click="doLogin()">login</button>
