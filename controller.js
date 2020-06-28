@@ -46,7 +46,7 @@ var clase;
 
 var reserva;
 var profile_book;
-
+var profile_a;
 
 var url_busqueda;
 
@@ -55,6 +55,7 @@ var cesta2 = [];
 
 var logged = false;
 
+var aerolinea = false;
 
 /*
 
@@ -97,6 +98,14 @@ app.config(function($routeProvider) {
         controller: 'vuelosCtrl', 
         templateUrl: 'vuelos.html'
     }).
+    when('/vuelos_aerolinea', { 
+        controller: 'vuelosAerolineaCtrl', 
+        templateUrl: 'vuelos_aerolinea.html'
+    }).
+    when('/create', { 
+        controller: 'createCtrl', 
+        templateUrl: 'create.html'
+    }).
     when('/profile', {
         controller: 'profileCtrl',
         templateUrl: 'profile.html'
@@ -128,6 +137,319 @@ app.config(function($routeProvider) {
 
 
 
+
+
+
+
+/*
+*
+* NUEVO VUELO
+***************
+*/
+
+app.controller("createCtrl", function($scope,$routeParams,$http, $location){
+    
+    var vueloId;
+    var origen;
+    var destino;
+    var salida;
+    var llegada;
+    
+    var precio_business;
+    var precio_optima;
+    var precio_economy;
+    
+    var plazas_business;
+    var plazas_optima;
+    var plazas_economy;
+    
+    
+    $scope.doCreate = function() {
+        
+        
+        vueloId = $scope.createVuelo;
+        origen = $scope.createOrigen;
+        destino = $scope.createDestino;
+        salida = $scope.createSalida;
+        llegada = $scope.createLlegada;
+
+        precio_business = $scope.createPrecioBusiness;
+        precio_optima = $scope.createPrecioOptima;
+        precio_economy = $scope.createPrecioEconomy;
+
+        plazas_business = $scope.createPlazasBusiness;
+        plazas_optima = $scope.createPlazasOptima;
+        plazas_economy = $scope.createPlazasEconomy;
+        
+        tes();
+        
+    }
+    
+    
+    async function tes() {
+        var responseO = await makeRequest("POST", "http://51.15.247.76:3001/aerolineas/crear");
+        f(responseO);
+    }
+    
+    
+    function makeRequest(method, url) {
+        
+        return new Promise(function (resolve, reject) {
+            let xhr = new XMLHttpRequest();
+            xhr.open(method, url);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.setRequestHeader("Auth-Token", login_token);
+            xhr.onload = function () {
+                if (this.status >= 200 && this.status < 300) {
+                    resolve(xhr.response);
+                } else {
+                    reject({
+                        status: this.status,
+                        statusText: xhr.statusText
+                    });
+                }
+            };
+            xhr.onerror = function () {
+                reject({
+                    status: this.status,
+                    statusText: xhr.statusText
+                });
+            };
+
+
+            
+            var data = {
+                "vuelo": vueloId,
+                "origen": origen,
+                "destino" : destino,
+                "salida": salida,
+                "llegada": llegada,
+                "precio_business":precio_business,
+                "precio_optima":precio_optima,
+                "precio_economy": precio_economy,
+                "plazas_business":plazas_business,
+                "plazas_optima":plazas_optima,
+                "plazas_economy":plazas_economy
+            }
+            
+            console.log(data);
+            
+            xhr.send(JSON.stringify(data));
+        });
+    }
+    
+
+    
+    function f(responseO) {
+        var response = JSON.parse(responseO);
+
+        var bb = response.success;
+
+        console.log(response);
+        if (bb) {
+
+            alert(response.result);
+            $scope.$apply(function(){
+
+                success = true;
+                login_token = response.result.token;
+            });
+                
+
+        } else {
+            alert("ERROR");
+            $scope.$apply(function(){
+                //$location.path('/login').replace();
+            })
+        }
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    });
+
+
+
+
+
+/*
+*
+* RESULTADO DE LA BÚSQUEDA AEROLINEA
+*************************************
+*/
+
+app.controller("vuelosAerolineaCtrl", function($scope,$routeParams,$http, $location){
+    
+    
+    if (success === true) {
+        document.getElementById("login").innerHTML = "LOGOUT";
+        document.getElementById("name-profile").innerHTML = name;
+        document.getElementById("name").style = "display:inherit";
+        document.getElementById("login-logout").setAttribute("href","#!/logout");
+        //document.getElementById("home_id").setAttribute("ng-href", "#!/vuelos_aerolinea");
+        
+        
+    } else {
+        document.getElementById("login").innerHTML = "LOGIN";
+    }
+    
+    $scope.user = name;
+    
+    var vuelos3_aux = profile_a;
+    
+    var vuelos3 = [];
+    
+    //for (var i = 0; i < vuelos3_aux.length; i++){
+    for (var i = 0; i < 100; i++){
+    
+        vuelos3[i] = {};
+        vuelos3[i] = vuelos3_aux[i];
+        vuelos3[i].fecha = formatDate2(vuelos3_aux[i].salida);
+        vuelos3[i].hora_salida = formatDate(vuelos3_aux[i].salida) + " " + formatDate2(vuelos3_aux[i].salida);
+        vuelos3[i].hora_llegada = formatDate(vuelos3_aux[i].llegada)+ " " + formatDate2(vuelos3_aux[i].salida);
+    }
+    
+    
+    $scope.data2 = vuelos3;
+    
+    /*
+    
+    console.log(vuelos.salidas);
+    console.log(billetes);
+    console.log("vuelos.html: idaYvuelta: "+idaYvuelta);
+    
+    $scope.logged = logged;
+    $scope.origen = origen;
+    $scope.destino = destino;
+    $scope.billetes = billetes;
+    var vuelos_salidas_aux = vuelos.salidas;
+    var vuelos_salidas = vuelos_salidas_aux;
+    var vuelos2 = [];
+    for (var i = 0; i < vuelos_salidas_aux.length; i++){
+        vuelos_salidas[i].fecha = formatDate2(vuelos_salidas_aux[i].salida);
+        vuelos_salidas[i].hora_salida = formatDate(vuelos_salidas_aux[i].salida) + " " + formatDate2(vuelos_salidas_aux[i].salida);
+        vuelos_salidas[i].hora_llegada = formatDate(vuelos_salidas_aux[i].llegada)+ " " + formatDate2(vuelos_salidas_aux[i].salida);
+        vuelos_salidas[i].billetes_business = billetes * vuelos_salidas_aux[i].precio_business;        
+        vuelos_salidas[i].billetes_optima = billetes * vuelos_salidas_aux[i].precio_optima;
+        vuelos_salidas[i].billetes_economy = billetes * vuelos_salidas_aux[i].precio_economy;        
+    }
+    
+    for (var i = 0; i < vuelos_salidas.length; i++) {
+        vuelos2[i] = {};
+        vuelos2[i] = vuelos_salidas[i];
+    }
+    
+    
+    if(idaYvuelta === "true") {
+        var vuelos_llegadas = vuelos.llegadas;
+        var vuelos_llegadas_aux = vuelos_llegadas;
+        console.log(vuelos_llegadas);
+        for (var i = 0; i < vuelos_salidas_aux.length; i++){
+            vuelos_llegadas[i].fecha = formatDate2(vuelos_llegadas_aux[i].llegada);
+            vuelos_llegadas[i].hora_salida = formatDate(vuelos_llegadas_aux[i].salida)+ " "+formatDate2(vuelos_llegadas_aux[i].llegada);
+            vuelos_llegadas[i].hora_llegada = formatDate(vuelos_llegadas_aux[i].llegada)+ " "+formatDate2(vuelos_llegadas_aux[i].llegada);
+            vuelos_llegadas[i].billetes_business = billetes * vuelos_llegadas_aux[i].precio_business;
+            vuelos_llegadas[i].billetes_optima = billetes * vuelos_llegadas_aux[i].precio_optima;
+            vuelos_llegadas[i].billetes_economy = billetes * vuelos_llegadas_aux[i].precio_economy;
+            
+            
+        }
+
+        for (var i = vuelos_salidas.length; i < vuelos_salidas.length + vuelos_llegadas.length; i++) {
+            vuelos2[i] = {};
+            vuelos2[i] = vuelos_llegadas[i-vuelos_salidas.length];
+        }
+
+    }
+    
+    $scope.data = vuelos2;
+*/
+    $scope.comprarBusiness = function(item) {
+        vuelo_actual = item;
+        clase = "business";
+        $location.path("/booking").replace();
+    }
+    
+    $scope.comprarOptima = function(item) {
+        vuelo_actual = item;
+        clase = "optima";
+        $location.path("/booking").replace();
+    }
+    
+    $scope.comprarEconomy = function(item) {
+        vuelo_actual = item;
+        clase = "economy";
+        $location.path("/booking").replace();
+    }
+    
+    function formatDate2(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+        if (month.length < 2) 
+            month = '0' + month;
+        if (day.length < 2) 
+            day = '0' + day;
+
+        return [year, month, day].join('-');
+    }
+
+    function formatDate(date) {
+        
+        var d_aux = new Date(date).getTimezoneOffset(),
+            offset_hrs = parseInt(Math.abs(d_aux/60)),
+            offset_mins = Math.abs(d_aux%60);
+
+        
+        var d = new Date(date),
+            hour = (d.getHours()),
+            min = d.getMinutes();
+        
+        if(d_aux > 0) {
+            
+            hour += offset_hrs;
+            min += offset_mins;
+        }
+        
+        if (hour.toString().length < 2) 
+            hour = '0' + hour;
+        
+        if (min === 0) 
+            min = '00';
+        
+        if (min.toString().length === 1 && min !== 0)
+            min = min + '0';
+
+        if (min.toString().length < 2) 
+            min = '0' + min;
+
+        return [hour, min].join(':');
+    }
+    
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 *
 * RESULTADO DE LA BÚSQUEDA
@@ -135,6 +457,8 @@ app.config(function($routeProvider) {
 */
 
 app.controller("vuelosCtrl", function($scope,$routeParams,$http, $location){
+    
+    if(!aerolinea) {
     
     console.log(vuelos.salidas);
     console.log(billetes);
@@ -186,6 +510,9 @@ app.controller("vuelosCtrl", function($scope,$routeParams,$http, $location){
     
     $scope.data = vuelos2;
 
+        
+    }
+    
     $scope.comprarBusiness = function(item) {
         vuelo_actual = item;
         clase = "business";
@@ -1113,6 +1440,8 @@ app.controller("logoutCtrl", function($scope, $location){
                
 
 
+
+
 // login controller
 app.controller("loginCtrl", function($scope, $location){
     
@@ -1122,10 +1451,18 @@ app.controller("loginCtrl", function($scope, $location){
     var responseO;
     
 
+
+    $scope.updateLogType = function(tipo) {
+        aerolinea = tipo;
+        console.log(aerolinea);
+    }
+    
+    
     $scope.doLogin = function() {
         tes();
 
     }
+    
     
     
     function makeRequest(method, url) {
@@ -1152,7 +1489,7 @@ app.controller("loginCtrl", function($scope, $location){
             };
             console.log($scope.login_email);
             console.log($scope.login_password);
-            xhr.send(JSON.stringify({"email": $scope.login_email, "password": $scope.login_password }));
+            xhr.send(JSON.stringify({"email": $scope.login_email, "password": $scope.login_password, "aerolinea":aerolinea }));
         });
     }
     
@@ -1169,15 +1506,33 @@ app.controller("loginCtrl", function($scope, $location){
         console.log(response);
         if (bb) {
             
+            
+            if (aerolinea) {
+                $scope.$apply(function(){
+                    
+                    name = $scope.login_email;
+                    success = true;
+                    login_token = response.result.token;
+
+                    tes3();
+                })
+                
+                
+            } else {
+            
+            
             $scope.$apply(function(){
                 $location.path("/");
                 name = $scope.login_email;
                 success = true;
                 login_token = response.result.token;
                 
+                //document.getElementById("home_id").setAttribute("ng-href", "#!");
+                
                 tes2();
                 
             })
+            }
         } else {
             alert("Usuario no registrado");
             $scope.$apply(function(){
@@ -1249,6 +1604,84 @@ app.controller("loginCtrl", function($scope, $location){
     
     
     
+        
+    async function tes3() {
+        
+        var url = "http://51.15.247.76:3001/aerolineas/vuelos";
+
+        var responseO = await makeRequest3("GET", url);
+        console.log(responseO);
+        f3(responseO);
+    }
+    
+
+        function makeRequest3(method, url) {
+        
+        return new Promise(function (resolve, reject) {
+            let xhr = new XMLHttpRequest();
+            xhr.open(method, url);
+            console.log(login_token);
+            xhr.setRequestHeader("Auth-Token", login_token);
+
+            xhr.onload = function () {
+                if (this.status >= 200 && this.status < 300) {
+                    resolve(xhr.response);
+                    console.log(xhr.response);
+                } else {
+                    reject({
+                        status: this.status,
+                        statusText: xhr.statusText
+                    });
+                }
+            };
+            xhr.onerror = function () {
+                reject({
+                    status: this.status,
+                    statusText: xhr.statusText
+                });
+            };
+
+            xhr.send();
+        });
+    }
+    
+
+    
+    function f3(responseO) {
+        var response = JSON.parse(responseO);
+        console.log(response.result);
+        var bb = response.success;
+
+        if (bb) {
+            profile_a = response.result;
+            //logged = true;
+            
+            $scope.$apply(function(){
+                $location.path('/vuelos_aerolinea').replace();
+            })
+            
+            
+        } else {
+            alert("ERROR");
+            $scope.$apply(function(){
+                $location.path('/').replace();
+            })
+        }
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 });
 
 
@@ -1256,6 +1689,13 @@ app.controller("loginCtrl", function($scope, $location){
 
 // Controlador de signup
 app.controller("signupCtrl", function($scope, $location){
+    
+    
+    $scope.updateLogType = function(tipo) {
+        aerolinea = tipo;
+        console.log(aerolinea);
+    }
+    
     
     $scope.doSignup = function() {
 
@@ -1299,9 +1739,9 @@ app.controller("signupCtrl", function($scope, $location){
                     statusText: xhr.statusText
                 });
             };
-            console.log($scope.login_email);
-            console.log($scope.login_password);
-            xhr.send(JSON.stringify({"email": $scope.signup_email, "password": $scope.signup_password }));
+            console.log($scope.signup_email);
+            console.log($scope.signup_password);
+            xhr.send(JSON.stringify({"email": $scope.signup_email, "password": $scope.signup_password, "aerolinea":aerolinea }));
         });
     }
     
@@ -1318,6 +1758,7 @@ app.controller("signupCtrl", function($scope, $location){
         if (bb) {
             
             $scope.$apply(function(){
+                //console.log(response);
                 $location.path("/");
                 
                 alert("Usuario registrado con éxito!");
