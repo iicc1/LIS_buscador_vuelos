@@ -1,0 +1,78 @@
+<div ng-controller="profileCtrl">
+
+
+    <div id="reserva" class="body-responsive body-view">
+		<div class="center-inpur-output-container">
+			<div class="container">
+                
+				<div class="row">
+					<div class="col-md-4">
+                        
+                                                <div class="row">
+                        <div class="col-md-11">
+                            <div class="profile">
+                            <div class="user">
+                                Cliente
+                            </div>
+                            <br>
+                            <div>
+                                <div class="profile-label">
+                                    USUARIO
+                                </div>
+                                <div class="profile-data"><h1>{{user}}</h1></div>
+                            </div>
+
+
+						</div>
+                            
+                            
+                            
+
+                        </div>
+                                            
+                                    
+                            <div class="col-md-1"></div>         
+                        </div>
+                    </div>
+                             
+					<div class="col-md-8">
+                        
+                        <div class="flies"> Reservas <br><br><br>
+                                <div class="table-scroll">
+    <table class="carrito-style table-striped" >
+        <tr class="row">
+            <th class="col-md-2 table-style" >Vuelo</th>
+            <th class="col-md-3 table-style" >Origen / Destino</th>           
+            <th class="col-md-3 table-style" >Salida / Llegada</th>
+            <th class="col-md-2 table-style" >Pasajero</th>
+            <th class="col-md-1 table-style" >Detalles</th>         
+            
+
+        </tr>
+        
+        <tr class="row" ng-repeat="i in profileBook">
+
+
+            <td class="col-md-2 cell-style" style="font-size: smaller ">{{i.vuelo}}</td>
+            <td class="col-md-3 cell-style" >{{i.salida}} <br> {{i.llegada}}</td>
+            <td class="col-md-3 cell-style" >{{i.hora_salida}} <br> {{i.hora_llegada}}</td>
+            <td class="col-md-2 cell-style" >{{i.nombre}}</td>
+            <td class="col-md-1 cell-style" >{{i.clase}} <br> {{i.precio}}</td>
+
+            
+        </tr>
+    </table>
+                            </div>
+                            
+                        </div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    
+</div>
+
+
+

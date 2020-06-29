@@ -1,0 +1,145 @@
+<form novalidate name="userInput">
+
+    <div class="body-responsive body-view">
+		<div class="center-inpur-output-container">
+			<div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="row">
+                        <div class="col-md-11">
+                            <div class="profile">
+                            <div class="user">
+                                Aerolínea
+                            </div>
+                            <br>
+                            <div>
+                                <div class="profile-label">
+                                    USUARIO
+                                </div>
+                                <div class="profile-data"><h1>{{user}}</h1></div>
+                            </div>
+
+                            </div>
+                            </div>
+                                                                
+                            <div class="col-md-1"></div>         
+                        </div>
+                    </div>
+                             
+					<div class="col-md-8">
+                        
+						<div class="form">
+							<form>
+
+                                    
+                    
+                                <div class="row">
+                                	<div class="col-md-3">    
+                                <div class="label-group">
+                                    <span class="label">VUELO</span>
+                                    <input class="input" type="text" ng-model="createVuelo" placeholder="ID de vuelo" required>
+								</div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="row">
+									<div class="col-md-6">
+										<div class="label-group">
+											<span class="label">ORIGEN</span>
+                                            <input class="input" type="text" ng-model="createOrigen" placeholder="Ciudad" required>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="label-group">
+											<span class="label">DESTINO</span>
+                                            <input class="input" type="text" ng-model="createDestino" placeholder="Ciudad">
+										</div>
+									</div>
+                                    </div>
+                                </div>
+                                </div>
+                    
+
+                    
+								<div class="row">
+									<div class="col-md-6">
+										<div class="label-group">
+                                            <span class="label">SALIDA</span>
+                                            <input class="input" type="date" ng-model="createSalida" required>
+                                        </div>
+									</div>
+									<div class="col-md-6">
+										<div class="label-group">
+                                            <span class="label">LLEGADA</span>
+                                            <input class="input" type="date" ng-model="createLlegada" required>
+                                        </div>  
+                                    </div>
+                                </div>
+                                
+                                
+                                
+                               <div class="row">
+					               <div class="col-md-4">
+                                        <div class="label-group">
+                                            <span class="label">PRECIO BUSINESS</span>
+                                            <input class="input" type="number" min="1" max="500" value="1" ng-model="createPrecioBusiness" required>
+				                        </div>
+                                    </div>
+                                   <div class="col-md-4">
+                                       <div class="label-group">
+                                            <span class="label">PRECIO OPTIMA</span>
+                                            <input class="input" type="number" min="1" max="500" value="1" ng-model="createPrecioOptima" required>
+				                        </div>
+                                    </div>
+                        			
+                                   <div class="col-md-4">
+                                        <div class="label-group">
+                                            <span class="label">PRECIO ECONOMY</span>
+                                            <input class="input" type="number" min="1" max="500" value="1" ng-model="createPrecioEconomy" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="label-group">
+                                            <span class="label">PLAZAS BUSINESS</span>
+                                            <input class="input" type="number" min="1" max="500" value="1" ng-model="createPlazasBusiness" required>
+				                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="label-group">
+                                            <span class="label">PLAZAS OPTIMA</span>
+                                            <input class="input" type="number" min="1" max="500" value="1" ng-model="createPlazasOptima" required>
+				                        </div>
+                                    </div>
+                    
+                                    <div class="col-md-4">
+                                        <div class="label-group">
+                                            <span class="label">PLAZAS ECONOMY</span>
+                                            <input class="input" type="number" min="1" max="500" value="1" ng-model="createPlazasEconomy" required>
+				                        </div>
+                                    </div>
+                                </div>
+                                        
+                                        
+                          
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3">
+                    <button class="btn" ng-click="doCreate()" >create</button>
+                                </div>
+</div>
+        
+                </form>
+</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</form>
+
+

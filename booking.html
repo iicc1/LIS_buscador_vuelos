@@ -1,0 +1,120 @@
+<form novalidate name="userInput">
+
+    
+    <div id="reserva" class="body-responsive body-view">
+		<div class="center-inpur-output-container">
+			<div class="container">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <div class="form">
+                            <div class="row">
+                            <div class="col-md-1"></div>
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="profile-label">
+                                            {{Viaje}}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div>
+                                            {{Origen}}
+                                        </div>
+                                        <div>
+                                            -
+                                        </div>
+                                        <div>
+                                            {{Destino}}
+                                        </div>
+                                        <div>
+                                            :
+                                        </div>
+                                        <div>
+                                            {{Fecha}}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="profile-label">CLASE {{Clase}}</div>
+                                    </div>
+                                    <br>
+                                    
+                                    
+                                        <div class="table-scroll">
+                                    
+                                    <div ng-repeat="item in pasajeros">
+                                    <div class="col">
+                                        
+                                        <div class="hide-click">
+                                        <div class="label-group">
+											<span class="label">Nombre</span>
+                                            <input class="input" type="text" placeholder="{{Nombre}}" ng-change="updateName(inputName)" ng-model="inputName" required>
+										</div>
+                                        </div>
+                                        
+                                        <div class="hide-click">
+                                        <div class="label-group">
+											<span class="label">Apellidos</span>
+                                            <input class="input" type="text" placeholder="{{Apellidos}}" ng-change="updateSurname(inputSurname)" ng-model="inputSurname" required>
+										</div>
+
+ 
+                                        </div>
+                                    </div>
+                                        
+
+                                        <div class="hide-click-btn">
+                                          <div class="row">
+                                            <div class="col-md-5"></div>
+                                            <div class="col-md-5"></div>
+                                            <div class="col-md-2">
+                                                <button class="btn" ng-click='doAdd(inputName,inputSurname)'>
+                                                    +
+                                                </button>
+                                            </div>
+										  </div>
+
+
+        
+
+                                        </div>
+
+                                        
+                                        
+                                    
+                                    </div>
+
+                                        
+                                    </div>
+
+                                                                <div class="row">
+                                <div class="col-md-6"></div>
+                                <div class="col-md-3" style="padding-right: 3vh; padding-top: 1.5vh">
+                                    <button ng-click="doChart(inputName,inputSurname)" class="btn">
+                                        AÑADIR 
+                                    </button>
+                                    
+                                </div>
+                                <div class="col-md-3" style="padding-right: 3vh; padding-top: 1.5vh">
+                                    <button ng-click="goChart()" class="btn">
+                                        CARRITO
+                                    </button>    
+                                </div>
+                                  
+                                
+                            </div>
+                                    
+                                    
+                                </div>
+                            <div class="col-md-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2"></div>              
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+

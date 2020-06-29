@@ -1,97 +1,108 @@
 <!DOCTYPE html>
-<html lang="es">
+<html ng-app="indexApp">
+    <head>
+        <meta charset="utf-8">
+        
+        <title>Trabajo Final</title>    
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link type="text/css" rel="stylesheet" href="stylesheet.css" />
 
-<head>
-	<meta charset="utf-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular-route.js"></script>
+        <script src="controller.js"></script>
+    </head>
+    
+    
+    
+    
+    <body ng-controller="mainCtrl">
+          
+    <nav class="navbar mainmenu-area">
+        <div class="container">
 
-	<title>Trabajo2 vuelos</title>    
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<link type="text/css" rel="stylesheet" href="stylesheet.css" />
+            
+                <div class="col-md-4" style="display: inline-block; align-content: center;">
+                                            <a href="#!/">
+                    <div class="row" style="display: table; margin-left: 2vh">
 
 
-</head>
+                    <img style = "display: table-cell"src="https://images.vexels.com/media/users/3/153006/isolated/preview/d493f3010e38758f2fb094641baa0d0e-icono-de-trazo-de-color-billetes-de-avi--n-by-vexels.png">
 
-<body>
-	<div id="reserva" class="section">
-		<div class="section-center">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-4">
-						<div class="reserva-txt">
-							<h1>RESERVA DE BILLETES DE AVIÓN</h1>
-							<p>Laboratorio de Ingeniería de Software. Segundo trabajo de la asignatura: AngularJS</p>
-						</div>
-					</div>
-					<div class="col">
-						<div class="form">
-							<form>
-                                <div class="row">
-                                    <div class="col">
-                                        <span>
-                                            <input type="radio" name="flight-type" value="one-way">
-                                            <b>Solo ida</b>
-                                        </span>
+                        <div style="display:  table-cell; vertical-align: middle">
+                            <div class="name">
+                    Grupo 1
+                                </div>
+</div>
 
-                                        <span class="col-md-6">
-                                            <input type="radio" name="flight-type" value="roundtrip">
-                                            <b>Ida y vuelta</b>
-                                        </span>
-                                    </div>
-								</div>
-                                
-                                <br>
-                                
-								<div class="row">
-									<div class="col-md-6">
-										<div class="label-group">
-											<span class="label">ORIGEN</span>
-											<input class="input" type="text" placeholder="Ciudad">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="label-group">
-											<span class="label">DESTINO</span>
-											<input class="input" type="text" placeholder="Ciudad">
-										</div>
-									</div>
-								</div>
-                                
-								<div class="row">
-									<div class="col-md-6">
-										<div class="label-group">
-											<span class="label">SALIDA</span>
-											<input class="input" type="date">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="label-group">
-											<span class="label">LLEGADA</span>
-											<input class="input" type="date">
-										</div>
-									</div>
-								</div>
-                                
-								<div class="row">
-									<div class="col-md-4">
-										<div class="label-group">
-											<span class="label">PASAJEROS</span>
-											<input class="input" type="number">
-										</div>
-									</div>
-									<div class="col-md-4"></div>
-                                    <div class="col-md-4">
-                                        <div class="form-btn">
-                                            <button class="submit-btn">VUELOS DISPONIBLES</button>
-                                        </div>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</body>
+                    </div>
+                                                                            </a>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-7">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="navigator">
+                                <a id="home_id" ng-href="#!">
+                            HOME
+                                </a>
+                            </div>
+                        </div>
+                    
+                        <div class="col-md-2">
+                            <div class="navigator">
+                                <a ng-href="#!">
+                            SEARCH
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-2">
+                            <div class="navigator">
+                                <a href="#!/listaVuelos/hjghj/fgjhg">
+                            NEWS
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-2">
+                            <div class="navigator">
+                                <a href="#!/edit/ORIGEN/DESTINO/DATE/CLIENTE">
+                                <!--a href="#!/edit/{{ORIGEN}}/{{DESTINO}}/{{DATE}}/{{CLIENTE}}"-->
+                                    PRICING
+                                </a>
+                                       
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-2">
+                            <div class="navigator">
+                                CONTACT
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-2">
+                            <div class="navigator">
+                                <a id="login-logout" href="#!/login">
+                                    <div id="login"></div>
+                                </a>
+                                <div id="name" ><a id="name-profile" ng-href="#!/profile"></a>
+                                </div>
 
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                    
+
+        </div>
+    
+    </nav>
+        <div>
+
+            <main ng-view></main>
+    
+        </div>
+
+    </body>
 </html>

@@ -1,0 +1,80 @@
+    <div class="body-responsive body-view">
+		<div class="center-inpur-output-container">
+			<div class="container">                
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="row">
+                        <div class="col-md-11">
+                            <div class="profile">
+                            <div class="user">
+                                Aerolínea
+                            </div>
+                            <br>
+                            <div>
+                                <div class="profile-label">
+                                    USUARIO
+                                </div>
+                                <div class="profile-data"><h1>{{user}}</h1></div>
+                            </div>
+
+
+                                <a href="#!/create">
+                                <button class="btn">
+                                    AÑADIR VUELO
+                                </button>
+                                </a>
+						</div>
+                            
+                            
+                            
+
+                        </div>
+                                            
+                                    
+                            <div class="col-md-1"></div>         
+                        </div>
+                    </div>
+                             
+					<div class="col-md-8">
+                
+                
+         <div class="flies">
+    <div class="table-scroll">
+    <div>
+        
+    <table class="table-striped">
+
+            <tr>
+
+                    <th style="width: 9%" class="table-style">Vuelo</th>
+                    <th style="width: 35%"  class="col table-style">Salida / Regreso</th>
+                    <th style="width: 20%"  class="col table-style">Origen / Destino</th>
+                    <th style="width: 10%"  class="col table-style" > Clase business </th>
+                    <th style="width: 10%"  class="col table-style" > Clase óptima </th>
+                    <th  style="width: 10%" class="col table-style" > Clase economy </th>
+
+
+        </tr>
+     
+        <tr ng-repeat="item in data2 ">
+
+            <td style="width: 9%"  class="cell-style" >{{item.vuelo}}<br>{{item.nombre_aerolinea}}</td>
+            <td  style="width: 35%" class="cell-style" >{{item.hora_salida}} <br> {{item.hora_llegada}}</td>
+            <td  style="width: 20%" class="cell-style" >{{item.origen}} <br> {{item.destino}}</td>
+            <td  style="width: 10%" class="cell-style">{{item.precio_business}} € <br> {{item.plazas_business}} plazas</td>
+            <td style="width: 10%"  class="cell-style">{{item.precio_optima}} € <br> {{item.plazas_optima}} plazas</td>
+            <td  style="width: 10%" class="cell-style">{{item.precio_economy}} € <br> {{item.plazas_economy}} plazas </td>
+
+        </tr>
+    </table>
+            </div>
+        </div>
+
+</div>                               
+
+                        </div>
+                    </div>
+                </div>                                          
+            </div>
+        </div>                      
+                    
