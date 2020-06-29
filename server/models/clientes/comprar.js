@@ -18,20 +18,20 @@ const comprar = async (compras, categoria, vueloId, usuarioId) => {
     // Resta el billete a la tabla vuelos
     await mysql.query('UPDATE vuelos SET plazas_optima = plazas_optima - ? WHERE vuelo_id = ?', [compras.length, vueloId])
     // Añade la compra del billete a la tabla compras
-    await mysql.query('INSERT INTO compras (compra_id, usuario_id, fecha_compra, fecha_vuelo, vuelo, vuelo_id, npas_optima) ' +
-      'VALUES (?, ?, ?, ?, ?, ?, ?)', [codigoCompra, usuarioId, new Date(), new Date(Date.parse(datosVuelo.salida)), datosVuelo.vuelo, vueloId, compras.length])
+    await mysql.query('INSERT INTO compras (compra_id, usuario_id, fecha_compra, fecha_vuelo, vuelo_id, npas_optima) ' +
+      'VALUES (?, ?, ?, ?, ?, ?)', [codigoCompra, usuarioId, new Date(), new Date(Date.parse(datosVuelo.salida)), vueloId, compras.length])
   } else if (categoria === 'business') {
     // Resta el billete a la tabla vuelos
     await mysql.query('UPDATE vuelos SET plazas_business = plazas_business - ? WHERE vuelo_id = ?', [compras.length, vueloId])
     // Añade la compra del billete a la tabla compras
-    await mysql.query('INSERT INTO compras (compra_id, usuario_id, fecha_compra, fecha_vuelo, vuelo, vuelo_id, npas_business) ' +
-      'VALUES (?, ?, ?, ?, ?, ?, ?)', [codigoCompra, usuarioId, new Date(), new Date(Date.parse(datosVuelo.salida)), datosVuelo.vuelo, vueloId, compras.length])
+    await mysql.query('INSERT INTO compras (compra_id, usuario_id, fecha_compra, fecha_vuelo, vuelo_id, npas_business) ' +
+      'VALUES (?, ?, ?, ?, ?, ?)', [codigoCompra, usuarioId, new Date(), new Date(Date.parse(datosVuelo.salida)), vueloId, compras.length])
   } else if (categoria === 'economy') {
     // Resta el billete a la tabla vuelos
     await mysql.query('UPDATE vuelos SET plazas_economy = plazas_economy - ? WHERE vuelo_id = ?', [compras.length, vueloId])
     // Añade la compra del billete a la tabla compras
-    await mysql.query('INSERT INTO compras (compra_id, usuario_id, fecha_compra, fecha_vuelo, vuelo, vuelo_id, npas_economy) ' +
-      'VALUES (?, ?, ?, ?, ?, ?, ?)', [codigoCompra, usuarioId, new Date(), new Date(Date.parse(datosVuelo.salida)), datosVuelo.vuelo, vueloId, compras.length])
+    await mysql.query('INSERT INTO compras (compra_id, usuario_id, fecha_compra, fecha_vuelo, vuelo_id, npas_economy) ' +
+      'VALUES (?, ?, ?, ?, ?, ?)', [codigoCompra, usuarioId, new Date(), new Date(Date.parse(datosVuelo.salida)), vueloId, compras.length])
   } else {
     throw new Error('Campo categoria no reconocido.')
   }
@@ -54,7 +54,7 @@ const comprar = async (compras, categoria, vueloId, usuarioId) => {
       codigoReserva: codigoReserva
     })
     // Añade los datos del billete en la tabla pasajeros
-    await mysql.query('INSERT INTO pasajeros (compra_id, cod_reserva, usuario_id, nombre, apellidos) VALUES (?, ?, ?, ?, ?)', [codigoCompra, codigoReserva, usuarioId, compra.nombre, compra.apellidos])
+    await mysql.query('INSERT INTO pasajeros (compra_id, cod_reserva, nombre, apellidos) VALUES (?, ?, ?, ?)', [codigoCompra, codigoReserva, compra.nombre, compra.apellidos])
   }
   // Devolvemos el código de compra y de reserva, por si se quiere cancelar el billete
   return {
